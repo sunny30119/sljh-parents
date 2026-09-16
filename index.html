@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>115 上班親會｜勝利國中 李智瑋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* 色票沿用四份簡報的 token，讓入口頁跟簡報看起來是同一家人 */
+:root{
+  --ground:#FFF6EF;
+  --surface:#FFFFFF;
+  --surface-2:#FCE7DA;
+  --ink:#241610;
+  --ink-2:#5B443A;
+  --muted:#8C7367;
+  --line:#EBD3C4;
+  --flame:#E84A27;
+  --teal:#0E8C7F;
+  --sun:#F7B32B;
+  --deep:#1E3A5F;
+  --shadow:0 2px 4px rgba(36,22,16,.05),0 14px 34px -14px rgba(232,74,39,.26);
+  --sans:'Noto Sans TC',"PingFang TC","Microsoft JhengHei",sans-serif;
+  --hit:'Anton','Noto Sans TC',"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#1A1210; --surface:#241A16; --surface-2:#38241C;
+    --ink:#FBEDE4; --ink-2:#D3BCB0; --muted:#A08A7D; --line:#432E25;
+    --flame:#FF6A45; --teal:#35C6B4; --sun:#FFC64B; --deep:#8FB6DE;
+    --shadow:0 2px 4px rgba(0,0,0,.4),0 16px 38px -16px rgba(0,0,0,.7);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:880px;margin:0 auto;
+  padding-inline:20px;
+  padding-block:clamp(28px,6vw,58px) clamp(36px,7vw,72px);
+  display:flex;flex-direction:column;gap:clamp(22px,4vw,32px);
+}
+
+/* ---------- 頁首 ---------- */
+.head{display:flex;flex-direction:column;gap:10px}
+.eyebrow{
+  align-self:flex-start;
+  font-family:var(--hit);letter-spacing:.1em;
+  font-size:clamp(12px,3vw,15px);
+  background:var(--flame);color:#fff;
+  padding:4px 14px;border-radius:999px;line-height:1.6;
+}
+h1{
+  margin:0;font-family:var(--hit);font-weight:400;
+  font-size:clamp(44px,12vw,86px);line-height:.92;
+  letter-spacing:-.01em;color:var(--ink);
+}
+.sub{margin:0;font-size:clamp(15px,3.8vw,20px);color:var(--ink-2);font-weight:700}
+.strip{display:flex;gap:6px;align-items:center;margin-top:3px}
+.strip i{height:8px;border-radius:999px;display:block}
+.strip i:nth-child(1){width:74px;background:var(--flame)}
+.strip i:nth-child(2){width:34px;background:var(--sun)}
+.strip i:nth-child(3){width:18px;background:var(--teal)}
+
+/* ---------- 分組小標 ---------- */
+.gl{
+  font-size:clamp(13px,3.2vw,15px);font-weight:900;
+  color:var(--muted);letter-spacing:.06em;
+  display:flex;align-items:center;gap:10px;margin-bottom:-6px;
+}
+.gl::after{content:"";flex:1;height:2px;background:var(--line);border-radius:999px}
+
+/* ---------- 卡片 ---------- */
+.doors{display:grid;gap:clamp(12px,2.4vw,16px);grid-template-columns:1fr}
+@media (min-width:700px){.doors{grid-template-columns:1fr 1fr}}
+
+.door{
+  display:flex;flex-direction:column;gap:6px;
+  background:var(--surface);
+  border-radius:15px;
+  border-top:7px solid var(--teal);
+  padding:clamp(17px,3.6vw,24px);
+  box-shadow:var(--shadow);
+  text-decoration:none;color:inherit;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.door.c-flame{border-top-color:var(--flame)}
+.door.c-sun{border-top-color:var(--sun)}
+.door.c-deep{border-top-color:var(--deep)}
+.door:hover{transform:translateY(-3px);box-shadow:0 4px 8px rgba(36,22,16,.07),0 22px 44px -16px rgba(232,74,39,.32)}
+.door:focus-visible{outline:3px solid var(--sun);outline-offset:4px}
+@media (prefers-reduced-motion:reduce){.door{transition:none}.door:hover{transform:none}}
+
+.door-when{
+  font-family:var(--hit);letter-spacing:.07em;
+  font-size:clamp(12.5px,3vw,15px);color:var(--teal);line-height:1.5;
+}
+.c-flame .door-when{color:var(--flame)}
+.c-sun .door-when{color:#B07800}
+.c-deep .door-when{color:var(--deep)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .c-sun .door-when{color:var(--sun)}}
+
+.door-name{font-size:clamp(21px,5vw,27px);font-weight:900;line-height:1.3;letter-spacing:-.01em}
+.door-what{font-size:clamp(13.5px,3.3vw,15.5px);color:var(--ink-2);line-height:1.66;margin:4px 0 0}
+.door-go{
+  margin-top:6px;font-family:var(--hit);letter-spacing:.06em;
+  font-size:clamp(13.5px,3.3vw,16px);color:var(--teal);
+}
+.c-flame .door-go{color:var(--flame)}
+.c-sun .door-go{color:#B07800}
+.c-deep .door-go{color:var(--deep)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .c-sun .door-go{color:var(--sun)}}
+
+.foot{
+  font-size:clamp(12.5px,3.1vw,14.5px);
+  color:var(--muted);line-height:1.7;
+  border-top:2px solid var(--line);padding-top:16px;
+}
+.foot strong{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="head">
+    <span class="eyebrow">新竹縣立勝利國民中學</span>
+    <h1>115 上班親會</h1>
+    <p class="sub">李智瑋　老師　·　2026.09.17（四）</p>
+    <div class="strip"><i></i><i></i><i></i></div>
+  </header>
+
+  <p class="gl">915　我是這班的導師</p>
+  <nav class="doors">
+
+    <a class="door c-flame" href="915-homeroom.html">
+      <span class="door-when">20:00 起　導師報告</span>
+      <span class="door-name">915 導師報告</span>
+      <p class="door-what">915 這三年的成績軌跡、成績查詢系統怎麼登入怎麼看、九年級這一年的完整行事曆、免試入學積分，以及班費。</p>
+      <span class="door-go">打開 →</span>
+    </a>
+
+    <a class="door" href="915.html">
+      <span class="door-when">19:20–20:00　自然科</span>
+      <span class="door-name">915 理化課程</span>
+      <p class="door-what">自然這一科三年怎麼翻過來的、會考自然考什麼、這學期進度與複習時程，還有 36 個互動模擬工具。</p>
+      <span class="door-go">打開 →</span>
+    </a>
+
+  </nav>
+
+  <p class="gl">910 · 920　我是這兩班的自然科老師</p>
+  <nav class="doors">
+
+    <a class="door c-sun" href="920.html">
+      <span class="door-when">數理資優班</span>
+      <span class="door-name">920 理化課程</span>
+      <p class="door-what">資優班的理化課我優先教怎麼想。這份是從孩子的自評出發：他們的底子、卡點，以及求助的習慣。</p>
+      <span class="door-go">打開 →</span>
+    </a>
+
+    <a class="door c-deep" href="910.html">
+      <span class="door-when">普通班</span>
+      <span class="door-name">910 理化課程</span>
+      <p class="door-what">一節課裡有三種不同的孩子、這個班現在最需要補的地方，還有我在課堂上實際怎麼做。</p>
+      <span class="door-go">打開 →</span>
+    </a>
+
+  </nav>
+
+  <p class="foot">
+    這幾份簡報都可以<strong>帶回家慢慢看</strong>，裡面有完整的行事曆、會考與升學資訊，還有成績查詢系統的登入方式。<br>
+    今天沒能全部講完的，都在裡面。有任何問題，隨時找我。
+  </p>
+
+</div>
+</body>
+</html>
