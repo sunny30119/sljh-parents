@@ -468,13 +468,125 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
   .who-n{width:auto;justify-self:flex-start;padding-left:18px;padding-right:18px}
 }
 
+
+/* ========== 講者功能（S 講稿／T 計時／R 歸零／Esc 總覽）==========
+   互動邏輯與鍵位比照 915 理化簡報，外觀沿用本檔既有的 token。 */
+
+/* HUD 鍵位提示 */
+.hud-hint{
+  font-family:var(--hit);letter-spacing:.07em;
+  font-size:clamp(11px,1.02vw,13.5px);color:var(--muted);
+  white-space:nowrap;line-height:1.6;
+}
+@media (max-width:1000px){.hud-hint{display:none}}
+
+/* 計時器（T） */
+#timer{
+  position:fixed;top:clamp(10px,1.3vw,20px);right:clamp(10px,1.3vw,20px);z-index:55;
+  display:none;text-align:right;
+  background:var(--surface);border:2px solid var(--line);border-radius:14px;
+  padding:clamp(7px,.85vw,13px) clamp(11px,1.25vw,19px);box-shadow:var(--shadow);
+}
+#timer.on{display:block}
+#timer .tot{
+  font-family:var(--hit);font-variant-numeric:tabular-nums;
+  font-size:clamp(26px,2.8vw,40px);line-height:1;color:var(--ink);
+}
+#timer .tot.warn{color:var(--sun)}
+#timer .tot.hot{color:var(--flame)}
+#timer .sub{font-size:clamp(11px,1.02vw,14px);color:var(--muted);margin-top:4px;line-height:1.5}
+#timer .sub b{font-family:var(--hit);font-weight:400;font-variant-numeric:tabular-nums}
+#timer .sub.over{color:var(--flame)}
+#timer .sub.over b{color:var(--flame)}
+
+/* 講者備忘（S） */
+#notes{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;
+  background:color-mix(in srgb,var(--ground) 93%,transparent);
+  color:var(--ink);border-top:5px solid var(--flame);
+  transform:translateY(105%);transition:transform .28s cubic-bezier(.2,.75,.3,1);
+  max-height:58vh;overflow-y:auto;
+  padding:clamp(11px,1.25vw,18px) clamp(16px,2.4vw,36px) clamp(15px,1.8vw,24px);
+  box-shadow:0 -14px 40px -18px rgba(0,0,0,.45);
+}
+@media (prefers-reduced-motion:reduce){#notes{transition:none}}
+#notes.on{transform:translateY(0)}
+#notes .nhead{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(8px,1vw,15px);margin-bottom:7px}
+#notes .np{
+  font-family:var(--hit);letter-spacing:.08em;font-size:clamp(12px,1.1vw,15px);
+  background:var(--flame);color:#fff;padding:3px 13px;border-radius:999px;line-height:1.6;
+}
+#notes .nt{font-size:clamp(12.5px,1.15vw,16.5px);color:var(--ink-2);font-weight:700}
+#notes .nmin{font-family:var(--hit);letter-spacing:.06em;font-size:clamp(12px,1.1vw,15px);color:var(--teal)}
+#notes .nclose{margin-left:auto;font-size:clamp(11px,1vw,13.5px);color:var(--muted)}
+#notes .ntext{
+  font-size:clamp(17px,1.5vw,20px);line-height:1.78;
+  white-space:pre-wrap;color:var(--ink);max-width:72ch;
+}
+
+/* 總覽（Esc） */
+.ovl{
+  position:fixed;inset:0;z-index:70;display:none;
+  background:var(--ground);
+  overflow:auto;padding:clamp(16px,2.2vw,34px);
+}
+.ovl.on{display:block}
+.ovl-head{
+  display:flex;align-items:center;gap:clamp(10px,1.3vw,18px);
+  max-width:1380px;margin:0 auto clamp(11px,1.4vw,20px);
+}
+.ovl-head h2{font-size:clamp(21px,2.5vw,34px)}
+.ovl-head .hintx{font-size:clamp(11.5px,1.05vw,14.5px);color:var(--muted)}
+.ovl-head .x{
+  margin-left:auto;font-family:var(--hit);letter-spacing:.07em;
+  font-size:clamp(12px,1.15vw,15px);background:transparent;
+  border:2px solid var(--line);color:var(--ink-2);
+  border-radius:999px;padding:5px 17px;cursor:pointer;line-height:1.6;
+}
+.ovl-head .x:hover{border-color:var(--flame);color:var(--flame)}
+.ovl-head .x:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+#ovGrid{
+  max-width:1380px;margin:0 auto;display:grid;
+  grid-template-columns:repeat(5,1fr);gap:clamp(9px,1.1vw,16px);
+}
+@media (max-width:1080px){#ovGrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){#ovGrid{grid-template-columns:repeat(2,1fr)}}
+.thumb{
+  position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:pointer;
+  border-radius:12px;border:3px solid var(--line);background:var(--ground);
+  padding:0;box-shadow:var(--shadow);
+}
+.thumb:hover{border-color:var(--sun)}
+.thumb.cur{border-color:var(--flame)}
+.thumb:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.thumb .tin{width:1280px;height:720px;transform-origin:top left;pointer-events:none}
+.thumb .tin .slide{
+  display:flex!important;min-height:720px;height:720px;
+  overflow:hidden;padding-bottom:var(--pad);animation:none!important;
+}
+.thumb .tin *{animation:none!important;transition:none!important}
+.thumb .tno{
+  position:absolute;right:6px;bottom:5px;font-family:var(--hit);font-size:14px;
+  background:var(--ink);color:var(--ground);padding:2px 11px;border-radius:999px;line-height:1.6;
+}
+@media print{#timer,#notes,.ovl,.hud-hint{display:none!important}}
+
 </style>
 </head>
 <body>
 
+<!-- ================= 講者計時器門檻（要改就改這裡） =================
+     910 是 10 分鐘的場次：9 分鐘轉橘、10 分鐘轉紅。
+     WARN = 轉橘（提醒收尾）／ HOT = 轉紅（超時）
+     ================================================================== -->
+<script>
+  var TIMER_WARN_MIN = 9;   /* 幾分鐘轉橘 */
+  var TIMER_HOT_MIN  = 10;   /* 幾分鐘轉紅 */
+</script>
+
 <div class="deck" id="deck">
 
-  <section class="slide cover is-current">
+  <section class="slide cover is-current" data-title="封面：開場" data-min="0.5">
     <div class="tag">115 學年度第一學期　親師座談會</div>
     <h1>我教的不是解題，<br><span class="burst">是怎麼想。</span></h1>
     <div class="cover-strip"><i></i><i></i><i></i></div>
@@ -496,7 +608,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="這個班的三種孩子" data-min="1.0">
     <div class="tag">先說說這個班</div>
     <h2>一節課裡，<br>其實有三種不同的孩子</h2>
     <div class="who">
@@ -525,7 +637,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">我把這頁放在最前面，是因為我希望您聽到的是<strong>真實的樣子</strong>，而不是一句「還不錯」。這裡說的是課堂的整體樣貌，<strong>不針對任何一個孩子</strong>。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="這個班的腦袋，天馬行空" data-min="0.75">
     <div class="tag is-sun">但我最想講的是這件事</div>
     <h2>這個班的腦袋，<em>天馬行空</em></h2>
     <div class="quotes">
@@ -547,7 +659,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="卡關點一：看不懂題目在問什麼" data-min="0.75">
     <div class="tag">卡關點 一</div>
     <h2>他們不是不會，<br>是<em>看不懂題目在問什麼</em></h2>
     <p class="lede">這是我在兩個班都看到的同一件事：題目一長、情境一多，孩子還沒開始想就先放棄了。可是<strong>會考現在幾乎全是這種題目</strong> —— 一大段生活情境，真正要用的觀念其實很淺。</p>
@@ -569,7 +681,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">讀題是可以練的。我會把它變成固定的課堂訓練，不是只在考前提醒。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="卡關點二：作業的完成度" data-min="1.0">
     <div class="tag">卡關點 二</div>
     <h2>這個班現在最需要補的，<br>是<em>作業的完成度</em></h2>
     <p class="lede">我想誠實跟各位報告：<strong>910 的作業完成度，是這學期我最想先處理的一件事。</strong>認真的那群孩子都有努力把我安排的份量做完，但目前未完成的比例偏高，而且不是偶爾，是持續的。</p>
@@ -586,7 +698,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">這一項我特別需要家裡幫忙 —— 待會最後會具體說明。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="會考長什麼樣" data-min="0.5">
     <div class="tag is-deep">會考長什麼樣</div>
     <h2>自然科 50 題，<br>理化佔了<em>一半以上</em></h2>
     <div class="grid g3">
@@ -612,7 +724,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">這也是我想先跟您說清楚的：如果補習班給的題目又多又難，孩子寫得很痛苦卻沒有變懂，那不是我們現在需要的。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="這學期三次段考進度" data-min="0.5">
     <div class="tag is-teal">這學期</div>
     <h2>三次段考，走完這些進度</h2>
     <div class="tbl-wrap">
@@ -642,7 +754,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">國三的難處在於：<strong>新進度要走，舊的四冊也要同時複習</strong>。所以複習測驗的時程會跟段考交錯進行，下一頁是完整的日期。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="分數怎麼算" data-min="0.5">
     <div class="tag is-sun">成績與教材</div>
     <h2>分數怎麼算，我先講清楚</h2>
     <div class="split">
@@ -663,7 +775,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">平時成績佔一半，而且一半是作業 —— 這是刻意的。<strong>國三這一年，穩定交、認真訂正的孩子，成績自然會被拉上來。</strong></p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="複習測驗完整時程" data-min="0.5">
     <div class="tag">複習測驗時程</div>
     <h2>從 10 月到寒輔的完整時程</h2>
     <div class="tl">
@@ -678,7 +790,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="我怎麼教（三步驟）" data-min="0.75">
     <div class="tag is-teal">我怎麼教</div>
     <h2>丟問題讓他們想，<br>而不是直接給答案</h2>
     <div class="steps">
@@ -707,7 +819,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">這三件事指向同一個目標：讓孩子「想通」，而不是「背起來」。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="現場示範：路徑長與位移" data-min="1.5">
     <div class="tag">現場示範　第一次段考 1-1</div>
     <h2><em>路徑長</em> 和 <em>位移</em>，差在哪？</h2>
     <div class="sim">
@@ -755,7 +867,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">把「往回走」拉到跟第一段一樣多，位移就變成 0 —— 孩子自己拉一次，就不需要背定義了。這一頁只是其中一個，網站上還有 36 個。</p>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="36 個互動模擬工具" data-min="0.5">
     <div class="tag is-teal">課堂工具</div>
     <h2>我自己做了 <em>36 個</em> 互動模擬工具</h2>
     <p class="lede">從月相、板塊到電流與透鏡成像，<strong>凡是課本上只能用文字描述的，我都想辦法做成可以動的</strong>。這些都是我利用課餘時間自己寫的，全部公開，孩子在家用手機就能打開。</p>
@@ -780,7 +892,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     </div>
   </section>
 
-  <section class="slide">
+  <section class="slide" data-title="想請您幫的三件事" data-min="1.0">
     <div class="tag is-sun">想請您幫的三件事</div>
     <h2>這一年，孩子需要家裡的配合</h2>
     <div class="asks">
@@ -809,7 +921,7 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <p class="note">這三件事裡，<strong>910 我最想拜託的是第一件和第三件</strong> —— 訂正，還有讓孩子願意開口問。</p>
   </section>
 
-  <section class="slide closing">
+  <section class="slide closing" data-title="結尾" data-min="0.25">
     <div class="tag">最後</div>
     <h2>我教的不是解題，<span class="burst" style="color:var(--flame)">是怎麼想</span>。<br>帶孩子把理化想通，<br>而不是背起來。</h2>
     <div class="cover-strip"><i></i><i></i><i></i></div>
@@ -826,8 +938,34 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
     <button class="hud-btn" id="fs" aria-label="全螢幕">全螢幕</button>
     <button class="hud-btn" id="theme" aria-label="切換為暗色">暗色</button>
   </div>
+  <div class="hud-hint">S 講稿　T 計時　R 歸零　Esc 總覽</div>
   <div class="progress" role="progressbar" aria-label="簡報進度"><div class="progress-fill" id="pf"></div></div>
   <div class="counter" id="counter">1 / 14</div>
+</div>
+
+<!-- ===== 講者功能：計時器 / 講者備忘 / 頁面總覽 ===== -->
+<div id="timer" role="status" aria-live="off" aria-label="講者計時器">
+  <div class="tot" id="tTot">00:00</div>
+  <div class="sub" id="tSub">本頁 00:00 / — 分　·　R 歸零</div>
+</div>
+
+<div id="notes" aria-hidden="true">
+  <div class="nhead">
+    <span class="np" id="nPage">1 / 14</span>
+    <span class="nt" id="nTitle"></span>
+    <span class="nmin" id="nMin"></span>
+    <span class="nclose">再按一次 S 收起</span>
+  </div>
+  <div class="ntext" id="nText"></div>
+</div>
+
+<div class="ovl" id="ovOverview">
+  <div class="ovl-head">
+    <h2>頁面總覽</h2>
+    <span class="hintx">點縮圖跳頁・Esc 關閉</span>
+    <button class="x" type="button" id="ovClose">關閉</button>
+  </div>
+  <div id="ovGrid"></div>
 </div>
 
 <script>
@@ -974,6 +1112,278 @@ a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-
   s1.addEventListener('input', render);
   s2.addEventListener('input', render);
   btn.addEventListener('click', play);
+  render();
+})();
+
+
+
+/* ===================================================================
+   講者功能：S 講稿 / T 計時 / R 歸零 / Esc 總覽
+   鍵位與行為比照 915 理化簡報。
+   全部用 capture 階段攔鍵，才不會和上面既有的導覽 listener 打架。
+   =================================================================== */
+
+/* 講稿：老師要自己改就改這裡，key 是頁碼 */
+const NOTES = {
+  1: `各位晚安，我是李智瑋，910 的理化老師。
+接下來十分鐘，我講三件事：孩子在課堂上真實的樣子、這學期到會考怎麼走、還有想請家裡幫的忙。
+第一頁的 QR code 現在就可以掃走，今天不用抄。`,
+  2: `我先講真實的樣子，不講「還不錯」。
+一節課裡，大概六到八個孩子眼神一直跟著我，我丟出去的東西接得住。
+中間那一群是大多數。有在聽，可是旁邊一有動靜就飄走，過一下又接回來。這學期我主要盯的就是他們。他們不是不想學，是還沒辦法自己穩住。
+還有六到八個，注意力還沒放在課堂上。我不會放掉。比起用高壓押回來，我更想把課上得值得他抬頭看一下。
+這頁講的是整體，不指任何一個孩子。`,
+  3: `這個班的腦袋很活。
+我隨口丟了一個「用太陽能煮蛋」，整班就討論起來。材料、聚光、天氣不好怎麼辦，問題自己冒出來。還有孩子說他買器材來給大家做。
+最後卡在沒器材，沒做成。可是那節課我記得很清楚。
+只看作業繳交，會覺得這班不夠認真。我看到的是好奇心不缺，缺的是接回課本那條路。那條路是我的工作。`,
+  4: `他們不是不會，是看不懂題目在問什麼。
+題目一長、字一多，還沒開始想就先放棄。可是會考現在幾乎全是這種題，一大段生活情境，真正要用的觀念其實很淺。
+我在課堂上帶他們圈關鍵字，把題幹一句一句拆開。先問「這題在問什麼」，不急著算。
+讀題是可以練的。我會把它變成固定訓練，不是考前才提醒。`,
+  5: `這頁我要誠實講。910 的作業完成度，是我這學期最想先處理的一件事。
+認真的那群孩子都有把份量做完。但目前未完成的比例偏高，而且不是偶爾，是持續的。
+我不先講分數。他沒寫，我就不知道他哪裡不會，等段考才發現就來不及。
+我會這樣盯：份量控制好，寧可少，但每一份都要真的寫完。缺交我主動追，不讓它默默累積。訂正要重想一次，抄答案我不收。
+這件事最後一頁會再拜託各位。`,
+  6: `自然科五十題，理化就佔二十七到三十題。
+重點不是題數，是題型。計算題比例已經降很多，難的是讀懂情境、選對觀念。
+所以如果補習班的題目又多又難，孩子寫得很痛苦卻沒有變懂，那不是我們現在需要的。`,
+  7: `這學期三次段考的範圍在這裡。理化從 1-1 走到 4-4 歐姆定律，地科走 Ch5 到 Ch7。
+國三的難處是新進度要走，舊的四冊也要同時複習。所以複習測驗會跟段考交錯，日期等一下給。
+這頁不用抄。`,
+  8: `分數怎麼算，我先講清楚。段考五成，平時五成。
+平時這五成裡面，作業佔一半，小考三成，學習態度兩成。遲交一天扣五分。
+作業佔這麼重是我刻意的。穩定交、認真訂正的孩子，成績自然會被拉上來。`,
+  9: `日期都在這裡。十月十四、十五第一次段考，十二月一、二第二次，一月十四、十五第三次。
+中間穿插複習測驗。十二月二十三、二十四是縣測，全縣一起考，那是會考前最重要的一次定位，我會特別盯。
+這頁不用抄，掃走就有。`,
+  10: `我上課很少一開始就給結論。
+我先丟一個情境問全班，讓他們猜、讓他們吵。猜錯的過程本身就在建立觀念。自己想過一次的東西，才不會考完就忘。
+公式我放後面。先讓他們看到畫面：車子怎麼動、力往哪裡推、電流怎麼走。畫得出來，才是真的懂。
+看不見的東西，我做成可以動的。下一頁直接示範一個。`,
+  11: `（先拉第一個滑桿）我讓他往右走八公尺。
+（拉第二個）再往回走三公尺。
+大家看下面兩個數字。路徑長十一，位移只有五。走了十一公尺，可是離起點只有五公尺。
+（按「走一次」）我讓他真的走一遍給孩子看。
+（把往回的拉到跟前面一樣）現在往回走八公尺。位移變成零，可是他明明走了十六公尺。
+到這裡就不用背定義了。孩子自己拉一次，路徑長跟位移的差別就進去了。
+（再往回拉一點，過起點）箭頭轉向了。九年級要處理的方向問題，從這裡帶出來很自然。
+這一頁只是其中一個。我做了三十六個，下一頁講。`,
+  12: `這三十六個都是我課餘時間自己寫的，全部公開，手機就能打開。
+課本上只能用文字描述的，我都做成可以動的。
+回家跟孩子一起玩。看他操作、聽他解釋給您聽，比問「今天上什麼」有用得多。`,
+  13: `想請各位幫我三件事。
+第一，盯訂正，不要盯分數。分數看過就好，要問的是「這題你現在會了嗎」。訂正只是把答案抄上去，那張考卷就白考了。麻煩您看一下，是抄的，還是真的重想過。
+第二，作息跟手機。國三拼的是耐力，睡不飽的孩子坐在教室裡也吸收不了，這件事只能靠家裡。
+第三，推他來問我。下課、午休、放學都可以，問多笨的問題我都不會生氣。孩子多半不是不敢問，是覺得算了下次再說。
+910 我最想拜託第一件跟第三件。`,
+  14: `910 的好奇心是夠的。這一年我會把它一步一步接回課本上。
+想聊孩子隨時找我。謝謝各位。`
+};
+
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var N = slides.length;
+  var cur = 0;
+
+  var timerEl = document.getElementById('timer');
+  var tTot    = document.getElementById('tTot');
+  var tSub    = document.getElementById('tSub');
+  var notesEl = document.getElementById('notes');
+  var nPage   = document.getElementById('nPage');
+  var nTitle  = document.getElementById('nTitle');
+  var nMin    = document.getElementById('nMin');
+  var nText   = document.getElementById('nText');
+  var ovEl    = document.getElementById('ovOverview');
+  var ovGrid  = document.getElementById('ovGrid');
+
+  /* ---------- 目前頁：靠 MutationObserver 跟著既有導覽走，不動原本的程式 ---------- */
+  function currentIndex(){
+    for (var k = 0; k < N; k++) { if (slides[k].classList.contains('is-current')) return k; }
+    return cur;
+  }
+  function sync(){
+    var n = currentIndex();
+    if (n === cur) return;
+    tick();                       // 先把時間結算到舊的那一頁
+    cur = n;
+    updateNotes();
+    render();
+    markThumb();
+  }
+  var mo = new MutationObserver(sync);
+  slides.forEach(function(s){ mo.observe(s, {attributes:true, attributeFilter:['class']}); });
+
+  /* ---------- 講者備忘（S） ---------- */
+  var notesOn = false;
+  function toggleNotes(){
+    notesOn = !notesOn;
+    notesEl.classList.toggle('on', notesOn);
+    notesEl.setAttribute('aria-hidden', notesOn ? 'false' : 'true');
+    if (notesOn) { updateNotes(); notesEl.scrollTop = 0; }
+  }
+  function updateNotes(){
+    var sl = slides[cur], p = cur + 1;
+    nPage.textContent  = p + ' / ' + N;
+    nTitle.textContent = sl.getAttribute('data-title') || '';
+    nMin.textContent   = '本頁 ' + (sl.getAttribute('data-min') || '—') + ' 分鐘';
+    nText.textContent  = NOTES[p] || '（本頁無講稿）';
+  }
+
+  /* ---------- 計時器（T 開始／暫停，R 歸零） ---------- */
+  var running = false, elapsed = 0, per = {}, last = 0;
+  /* 門檻常數定義在檔案最上方（<body> 後面那個小 script），老師要改就改那裡 */
+  var WARN = (typeof TIMER_WARN_MIN === 'number' ? TIMER_WARN_MIN : 9)  * 60000;
+  var HOT  = (typeof TIMER_HOT_MIN  === 'number' ? TIMER_HOT_MIN  : 10) * 60000;
+
+  function mmss(ms){
+    var s = Math.max(0, Math.round(ms / 1000));
+    return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  }
+  function tick(){
+    if (!running) return;
+    var now = Date.now(), d = now - last;
+    elapsed += d;
+    per[cur] = (per[cur] || 0) + d;
+    last = now;
+  }
+  function toggleTimer(){
+    timerEl.classList.add('on');
+    if (running) { tick(); running = false; }
+    else { last = Date.now(); running = true; }
+    render();
+  }
+  function resetTimer(){
+    tick();
+    elapsed = 0; per = {}; last = Date.now();
+    timerEl.classList.add('on');
+    render();
+  }
+  function render(){
+    var sl = slides[cur];
+    var min = sl.getAttribute('data-min') || '—';
+    var budget = parseFloat(min) * 60000 || 0;
+    var here = per[cur] || 0;
+    tTot.textContent = mmss(elapsed);
+    tSub.innerHTML = (running ? '' : '‖ 暫停　·　') +
+                     '本頁 <b>' + mmss(here) + '</b> / ' + min + ' 分　·　R 歸零';
+    var hot = elapsed >= HOT, warn = elapsed >= WARN;
+    tTot.classList.toggle('warn', warn && !hot);
+    tTot.classList.toggle('hot', hot);
+    tSub.classList.toggle('over', budget > 0 && here > budget);
+  }
+  setInterval(function(){ if (running) { tick(); render(); } }, 250);
+
+  /* 測試用：在 console 打 __deckTimerOffset(9*60000) 可以把時間往前撥，驗證顏色門檻 */
+  window.__deckTimerOffset = function(ms){ elapsed += ms; timerEl.classList.add('on'); render(); return mmss(elapsed); };
+
+  /* ---------- 頁面總覽（Esc） ---------- */
+  var built = false;
+  function buildOverview(){
+    if (built) return;
+    slides.forEach(function(sl, k){
+      var t = document.createElement('div');
+      t.className = 'thumb';
+      t.setAttribute('role', 'button');
+      t.setAttribute('tabindex', '0');
+      t.setAttribute('aria-label', '跳到第 ' + (k + 1) + ' 頁：' + (sl.getAttribute('data-title') || ''));
+
+      var tin = document.createElement('div');
+      tin.className = 'tin';
+      tin.setAttribute('aria-hidden', 'true');
+
+      var c = sl.cloneNode(true);
+      c.classList.add('is-current');
+      /* 複製品一定要把 id 拔掉，否則 getElementById 會抓到縮圖裡的假貨，
+         互動模擬那一頁就會壞掉 */
+      c.removeAttribute('id');
+      Array.prototype.forEach.call(c.querySelectorAll('[id]'), function(x){ x.removeAttribute('id'); });
+      Array.prototype.forEach.call(
+        c.querySelectorAll('a,button,input,select,textarea,[tabindex]'),
+        function(x){
+          x.setAttribute('tabindex', '-1');
+          x.setAttribute('aria-hidden', 'true');
+          if (x.tagName === 'A') x.removeAttribute('href');
+          if ('disabled' in x) x.disabled = true;
+        });
+      tin.appendChild(c);
+      t.appendChild(tin);
+
+      var no = document.createElement('div');
+      no.className = 'tno';
+      no.textContent = k + 1;
+      t.appendChild(no);
+
+      function jump(){ closeOverview(); go(k); }
+      t.addEventListener('click', jump);
+      t.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jump(); }
+      });
+      ovGrid.appendChild(t);
+    });
+    built = true;
+    scaleThumbs();
+  }
+  function scaleThumbs(){
+    Array.prototype.forEach.call(ovGrid.querySelectorAll('.tin'), function(el){
+      var w = el.parentElement.clientWidth;
+      el.style.transform = 'scale(' + (w / 1280) + ')';
+    });
+  }
+  function markThumb(){
+    Array.prototype.forEach.call(ovGrid.querySelectorAll('.thumb'), function(t, k){
+      t.classList.toggle('cur', k === cur);
+    });
+  }
+  /* 換頁沿用既有導覽：直接改 hash 讓原本的 show() 接手 */
+  function go(k){ location.hash = '#' + (k + 1); }
+
+  var lastFocus = null;
+  function openOverview(){
+    lastFocus = document.activeElement;
+    buildOverview();
+    requestAnimationFrame(scaleThumbs);
+    markThumb();
+    ovEl.classList.add('on');
+    var c = ovGrid.querySelectorAll('.thumb')[cur];
+    if (c) c.focus();
+  }
+  function closeOverview(){
+    /* 先把焦點移出去再標 aria-hidden，否則螢幕閱讀器會抱怨「焦點被藏起來」 */
+    var a = document.activeElement;
+    if (a && ovEl.contains(a) && a.blur) a.blur();
+    ovEl.classList.remove('on');
+    if (lastFocus && lastFocus.focus) { try { lastFocus.focus(); } catch (e) {} }
+  }
+  document.getElementById('ovClose').addEventListener('click', closeOverview);
+  ovEl.addEventListener('click', function(e){ if (e.target === ovEl) closeOverview(); });
+  window.addEventListener('resize', function(){ if (built) scaleThumbs(); });
+
+  /* ---------- 鍵盤：capture 階段，才能在總覽開著時擋掉既有的導覽鍵 ---------- */
+  document.addEventListener('keydown', function(e){
+    var k = e.key;
+    var esc = (k === 'Escape' || k === 'Esc');
+
+    if (ovEl.classList.contains('on')) {
+      if (esc) { closeOverview(); e.preventDefault(); e.stopImmediatePropagation(); }
+      else if (k === 'Enter' || k === ' ') { /* 讓縮圖自己處理 */ }
+      else { e.preventDefault(); e.stopImmediatePropagation(); }
+      return;
+    }
+
+    /* 互動模擬那一頁的滑桿有焦點時不搶鍵：方向鍵留給滑桿，只放行 Esc */
+    var t = e.target;
+    if (t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) && !esc) return;
+
+    if (k === 's' || k === 'S')      { toggleNotes(); e.preventDefault(); e.stopImmediatePropagation(); }
+    else if (k === 't' || k === 'T') { toggleTimer(); e.preventDefault(); e.stopImmediatePropagation(); }
+    else if (k === 'r' || k === 'R') { resetTimer();  e.preventDefault(); e.stopImmediatePropagation(); }
+    else if (esc)                    { openOverview(); e.preventDefault(); e.stopImmediatePropagation(); }
+  }, true);
+
+  cur = currentIndex();
+  updateNotes();
   render();
 })();
 
