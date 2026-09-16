@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>910 班親會｜想通，而不是背起來</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+
+:root{
+  --ground:#FFF6EF;
+  --surface:#FFFFFF;
+  --surface-2:#FCE7DA;
+  --ink:#241610;
+  --ink-2:#5B443A;
+  --muted:#8C7367;
+  --line:#EBD3C4;
+
+  --flame:#E84A27;
+  --flame-soft:#FDE3DA;
+  --teal:#0E8C7F;
+  --teal-soft:#D6EFEB;
+  --sun:#F7B32B;
+  --sun-soft:#FDF0D3;
+  --deep:#1E3A5F;
+
+  --shadow:0 2px 4px rgba(36,22,16,.05),0 14px 34px -14px rgba(232,74,39,.28);
+
+  --sans:'Noto Sans TC',"Microsoft JhengHei","PingFang TC",sans-serif;
+  --hit:'Anton','Noto Sans TC',"Microsoft JhengHei",sans-serif;
+
+  --pad:clamp(26px,4.2vw,72px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#1A1210;
+    --surface:#241A16;
+    --surface-2:#38241C;
+    --ink:#FBEDE4;
+    --ink-2:#D3BCB0;
+    --muted:#A08A7D;
+    --line:#432E25;
+    --flame:#FF6A45;
+    --flame-soft:#45201A;
+    --teal:#35C6B4;
+    --teal-soft:#12352F;
+    --sun:#FFC64B;
+    --sun-soft:#3B2C10;
+    --deep:#8FB6DE;
+    --shadow:0 2px 4px rgba(0,0,0,.4),0 16px 38px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#1A1210;
+  --surface:#241A16;
+  --surface-2:#38241C;
+  --ink:#FBEDE4;
+  --ink-2:#D3BCB0;
+  --muted:#A08A7D;
+  --line:#432E25;
+  --flame:#FF6A45;
+  --flame-soft:#45201A;
+  --teal:#35C6B4;
+  --teal-soft:#12352F;
+  --sun:#FFC64B;
+  --sun-soft:#3B2C10;
+  --deep:#8FB6DE;
+  --shadow:0 2px 4px rgba(0,0,0,.4),0 16px 38px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+.deck{position:relative;width:100%;min-height:100svh;display:flex;flex-direction:column}
+.slide{
+  display:none;flex:1;
+  padding:var(--pad);padding-bottom:calc(var(--pad) + 36px);
+  min-height:100svh;flex-direction:column;
+  justify-content:center;
+  justify-content:safe center;
+  overflow-y:auto;
+  gap:clamp(13px,1.7vh,24px);
+  max-width:1380px;margin:0 auto;width:100%;
+}
+.slide.is-current{display:flex}
+@media (prefers-reduced-motion:no-preference){
+  .slide.is-current{animation:rise .3s cubic-bezier(.2,.75,.3,1) both}
+  .slide.is-current .hit{animation:punch .44s cubic-bezier(.18,.9,.3,1.1) both}
+  .slide.is-current .bar-fill{animation:stretch .52s cubic-bezier(.2,.8,.3,1) both;transform-origin:left center}
+}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes punch{from{opacity:0;transform:translateY(10px) scale(.88)}to{opacity:1;transform:none}}
+@keyframes stretch{from{transform:scaleX(0)}to{transform:none}}
+
+/* ---------- 標頭 ---------- */
+.tag{
+  align-self:flex-start;
+  font-family:var(--hit);
+  font-size:clamp(14px,1.45vw,19px);
+  letter-spacing:.1em;
+  background:var(--flame);color:#fff;
+  padding:5px clamp(12px,1.3vw,18px);
+  border-radius:999px;line-height:1.5;
+}
+.tag.is-teal{background:var(--teal)}
+.tag.is-sun{background:var(--sun);color:var(--ink)}
+.tag.is-deep{background:var(--deep);color:#fff}
+
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.24;font-weight:900}
+h1{font-size:clamp(36px,5.8vw,80px);letter-spacing:-.02em}
+h2{font-size:clamp(27px,3.9vw,52px);letter-spacing:-.015em}
+h3{font-size:clamp(17px,1.85vw,25px);font-weight:700;line-height:1.4}
+p{margin:0;font-size:clamp(15px,1.45vw,20px);color:var(--ink-2)}
+.lede{font-size:clamp(16px,1.72vw,24px);color:var(--ink-2);max-width:60ch;font-weight:500}
+.note{font-size:clamp(12px,1.05vw,14.5px);color:var(--muted);line-height:1.6}
+strong{color:var(--ink);font-weight:900}
+em{font-style:normal;color:var(--flame);font-weight:900}
+
+/* ---------- 封面 ---------- */
+.cover{gap:clamp(18px,2.8vh,36px)}
+.cover h1{max-width:17ch}
+.cover h1 .burst{color:var(--flame)}
+.cover-strip{display:flex;gap:6px;align-items:center}
+.cover-strip i{height:9px;border-radius:999px;display:block}
+.cover-strip i:nth-child(1){width:clamp(56px,7vw,104px);background:var(--flame)}
+.cover-strip i:nth-child(2){width:clamp(28px,3.4vw,50px);background:var(--sun)}
+.cover-strip i:nth-child(3){width:clamp(16px,1.8vw,26px);background:var(--teal)}
+.cover-meta{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-family:var(--hit);letter-spacing:.07em;
+  font-size:clamp(13px,1.3vw,17px);
+  border:2px solid var(--line);border-radius:999px;
+  padding:4px 14px;color:var(--ink-2);line-height:1.6;
+}
+
+/* ---------- 格線 ---------- */
+.grid{display:grid;gap:clamp(11px,1.35vw,19px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+@media (max-width:840px){.g2,.g3{grid-template-columns:1fr}}
+
+.card{
+  background:var(--surface);
+  border-radius:14px;
+  padding:clamp(16px,1.8vw,28px);
+  display:flex;flex-direction:column;gap:9px;
+  box-shadow:var(--shadow);
+  border-top:6px solid var(--flame);
+}
+.card.is-teal{border-top-color:var(--teal)}
+.card.is-sun{border-top-color:var(--sun)}
+.card p{font-size:clamp(14px,1.25vw,17.5px)}
+
+/* 大數字 */
+.hit{
+  font-family:var(--hit);
+  font-size:clamp(54px,8.4vw,124px);
+  line-height:.86;letter-spacing:-.005em;
+  font-variant-numeric:tabular-nums;
+  color:var(--flame);
+}
+.hit.is-teal{color:var(--teal)}
+.hit.is-sun{color:var(--sun)}
+.hit small{font-size:.3em;letter-spacing:.04em;margin-left:.1em;color:var(--muted)}
+.hit-label{font-size:clamp(14px,1.32vw,18.5px);color:var(--ink);font-weight:500;line-height:1.55}
+
+/* ---------- 橫條 ---------- */
+.bars{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,16px)}
+.bar-row{display:flex;flex-direction:column;gap:5px}
+.bar-head{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.bar-name{font-size:clamp(14px,1.4vw,20px);color:var(--ink);font-weight:700}
+.bar-val{
+  font-family:var(--hit);font-variant-numeric:tabular-nums;
+  font-size:clamp(20px,2.2vw,32px);color:var(--muted);white-space:nowrap;line-height:1;
+}
+.bar-track{height:clamp(14px,1.7vh,22px);background:var(--surface-2);border-radius:999px;overflow:hidden}
+.bar-fill{height:100%;border-radius:999px;background:var(--flame);opacity:.45}
+.bar-row.is-top .bar-fill{opacity:1}
+.bar-row.is-top .bar-name,.bar-row.is-top .bar-val{color:var(--flame)}
+.bar-row.is-zero .bar-track{background:var(--teal-soft)}
+.bar-row.is-zero .bar-name,.bar-row.is-zero .bar-val{color:var(--teal)}
+
+/* ---------- 點陣 ---------- */
+.dotplot{display:flex;gap:clamp(6px,.9vw,15px);align-items:flex-end}
+.dot-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px}
+.dot-stack{
+  display:flex;flex-direction:column-reverse;gap:5px;
+  min-height:clamp(84px,12vh,146px);justify-content:flex-start;
+}
+.dot{
+  width:clamp(21px,2.4vw,32px);height:clamp(21px,2.4vw,32px);
+  border-radius:50%;background:var(--flame);opacity:.4;
+}
+.dot-col[data-tier="high"] .dot{background:var(--teal);opacity:1}
+.dot-col[data-tier="mid"] .dot{background:var(--sun);opacity:1}
+.dot-axis{
+  font-family:var(--hit);font-size:clamp(18px,1.9vw,26px);
+  color:var(--ink);border-top:3px solid var(--line);
+  width:100%;text-align:center;padding-top:6px;line-height:1.2;
+}
+.dot-cap{
+  font-size:clamp(11px,1.02vw,13.5px);color:var(--muted);
+  text-align:center;line-height:1.4;min-height:2.8em;
+}
+
+/* ---------- 引用 ---------- */
+.quotes{display:flex;flex-direction:column;gap:clamp(9px,1.15vw,15px)}
+.quote{
+  background:var(--flame-soft);
+  border-radius:12px;
+  padding:clamp(13px,1.45vw,21px) clamp(15px,1.7vw,25px);
+  display:flex;flex-direction:column;gap:5px;
+}
+.quote q{
+  font-size:clamp(16px,1.8vw,25px);color:var(--ink);
+  line-height:1.55;quotes:"「" "」";font-weight:700;
+}
+.quote cite{
+  font-style:normal;font-family:var(--hit);letter-spacing:.09em;
+  font-size:clamp(11.5px,1.05vw,14px);color:var(--muted);
+}
+
+/* ---------- 左右對照 ---------- */
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(11px,1.5vw,22px);align-items:stretch}
+@media (max-width:840px){.pair{grid-template-columns:1fr}.pair .arrow{justify-self:center;transform:rotate(90deg)}}
+.pair-side{display:flex;flex-direction:column;gap:9px;padding:clamp(15px,1.7vw,26px);border-radius:14px}
+.pair-side.said{background:var(--sun-soft)}
+.pair-side.did{background:var(--teal-soft)}
+.pair-tag{font-family:var(--hit);letter-spacing:.11em;font-size:clamp(13px,1.25vw,17px)}
+.said .pair-tag{color:var(--flame)}
+.did .pair-tag{color:var(--teal)}
+.pair-side p{color:var(--ink);font-size:clamp(14px,1.38vw,19px)}
+.arrow{display:flex;align-items:center;color:var(--flame);font-size:clamp(26px,2.8vw,42px);font-weight:900}
+
+/* ---------- 步驟 ---------- */
+.steps{display:flex;flex-direction:column;gap:clamp(8px,1.1vh,14px)}
+.step{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(13px,1.6vw,24px);
+  background:var(--surface);border-radius:14px;
+  padding:clamp(13px,1.45vw,22px) clamp(15px,1.6vw,26px);
+  box-shadow:var(--shadow);align-items:start;
+}
+.step-num{
+  font-family:var(--hit);font-size:clamp(26px,3vw,46px);
+  line-height:1;color:#fff;background:var(--flame);
+  width:clamp(42px,4.4vw,68px);height:clamp(42px,4.4vw,68px);
+  border-radius:12px;display:grid;place-items:center;
+}
+.step:nth-child(2) .step-num{background:var(--sun);color:var(--ink)}
+.step:nth-child(3) .step-num{background:var(--teal)}
+.step:nth-child(4) .step-num{background:var(--deep)}
+.step-body{display:flex;flex-direction:column;gap:3px}
+.step-body h3{font-size:clamp(16px,1.65vw,23px)}
+.step-body p{font-size:clamp(13.5px,1.22vw,17px)}
+
+/* ---------- 請求 ---------- */
+.asks{display:flex;flex-direction:column;gap:clamp(10px,1.3vw,18px)}
+.ask{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,1.7vw,24px);align-items:start;
+  background:var(--surface);border-radius:14px;
+  padding:clamp(15px,1.7vw,26px);box-shadow:var(--shadow);
+}
+.ask-mark{
+  font-family:var(--hit);font-size:clamp(22px,2.4vw,36px);line-height:1;
+  color:#fff;background:var(--flame);
+  width:clamp(40px,4.2vw,62px);height:clamp(40px,4.2vw,62px);
+  border-radius:50%;display:grid;place-items:center;
+}
+.ask:nth-child(2) .ask-mark{background:var(--teal)}
+.ask:nth-child(3) .ask-mark{background:var(--sun);color:var(--ink)}
+.ask-body{display:flex;flex-direction:column;gap:4px}
+.ask-body h3{font-size:clamp(16px,1.65vw,23px)}
+.ask-body p{font-size:clamp(13.5px,1.25vw,17.5px)}
+
+/* ---------- 網頁頁 ---------- */
+.link-box{
+  display:flex;flex-wrap:wrap;align-items:center;gap:clamp(13px,1.7vw,28px);
+  background:var(--ink);border-radius:16px;
+  padding:clamp(16px,1.8vw,28px);
+}
+.link-box .note{color:#C9B4A8}
+.link-url{
+  font-family:var(--hit);letter-spacing:.03em;
+  font-size:clamp(18px,2.2vw,32px);color:var(--sun);
+  word-break:break-all;line-height:1.25;text-decoration:none;display:inline-block;
+}
+a.link-url:hover{color:#fff;text-decoration:underline}
+a.link-url:focus-visible{outline:3px solid var(--sun);outline-offset:4px;border-radius:4px}
+.qr{
+  width:clamp(88px,9.4vw,132px);height:auto;
+  border-radius:10px;background:#fff;padding:7px;
+  flex-shrink:0;display:block;image-rendering:pixelated;
+}
+.link-kicker{
+  font-family:var(--hit);letter-spacing:.08em;
+  font-size:clamp(13px,1.3vw,18px);color:#C9B4A8;
+  line-height:1.5;margin-bottom:2px;
+}
+.units{display:flex;flex-wrap:wrap;gap:7px}
+.unit-chip{
+  font-weight:700;font-size:clamp(13px,1.3vw,18px);
+  background:var(--surface);color:var(--ink);
+  border-radius:999px;padding:4px 15px;line-height:1.6;
+  box-shadow:var(--shadow);
+}
+.unit-chip:nth-child(1){border-bottom:4px solid var(--flame)}
+.unit-chip:nth-child(2){border-bottom:4px solid var(--sun)}
+.unit-chip:nth-child(3){border-bottom:4px solid var(--teal)}
+.unit-chip:nth-child(4){border-bottom:4px solid var(--deep)}
+.unit-chip:nth-child(5){border-bottom:4px solid var(--flame)}
+
+/* ---------- 結尾 ---------- */
+.closing{gap:clamp(16px,2.4vh,32px)}
+.closing h2{max-width:19ch}
+
+/* ---------- HUD ---------- */
+.hud{
+  position:fixed;left:0;right:0;bottom:0;z-index:20;
+  display:flex;align-items:center;gap:clamp(10px,1.4vw,20px);
+  padding:9px clamp(14px,2.4vw,30px);
+  background:color-mix(in srgb,var(--ground) 90%,transparent);
+  backdrop-filter:blur(8px);border-top:2px solid var(--line);
+}
+.progress{flex:1;height:5px;background:var(--surface-2);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:var(--flame);border-radius:999px;transition:width .34s cubic-bezier(.2,.75,.3,1)}
+@media (prefers-reduced-motion:reduce){.progress-fill{transition:none}}
+.counter{
+  font-family:var(--hit);font-variant-numeric:tabular-nums;
+  font-size:clamp(14px,1.3vw,18px);letter-spacing:.08em;color:var(--muted);white-space:nowrap;
+}
+.hud-btns{display:flex;gap:6px}
+.hud-btn{
+  font-family:var(--hit);letter-spacing:.07em;font-size:clamp(12px,1.15vw,15px);
+  background:transparent;border:2px solid var(--line);color:var(--ink-2);
+  border-radius:999px;padding:4px 13px;cursor:pointer;line-height:1.6;
+}
+.hud-btn:hover{border-color:var(--flame);color:var(--flame)}
+.hud-btn:focus-visible,.hud-btn:focus{outline:3px solid var(--sun);outline-offset:2px}
+@media print{.hud{display:none}.slide{display:flex!important;page-break-after:always}}
+
+
+/* ========== 本檔新增元件 ========== */
+
+/* 表格 */
+.tbl-wrap{overflow-x:auto;border-radius:14px;box-shadow:var(--shadow)}
+.tbl{width:100%;border-collapse:collapse;background:var(--surface);min-width:560px}
+.tbl th,.tbl td{padding:clamp(9px,1.05vw,17px) clamp(10px,1.15vw,19px);text-align:left;border-bottom:2px solid var(--line);vertical-align:top}
+.tbl thead th{background:var(--ink);color:#fff;font-family:var(--hit);font-weight:400;letter-spacing:.07em;font-size:clamp(13px,1.28vw,18px)}
+.tbl tbody th{font-family:var(--hit);font-weight:400;color:var(--flame);font-size:clamp(16px,1.72vw,25px);white-space:nowrap;line-height:1.3}
+.tbl td{font-size:clamp(13px,1.2vw,17.5px);color:var(--ink-2);line-height:1.68}
+.tbl tbody tr:last-child th,.tbl tbody tr:last-child td{border-bottom:0}
+.tbl .u{color:var(--teal);font-weight:900}
+.tbl .p{color:var(--ink);font-weight:900}
+
+/* 時程 */
+.tl{display:flex;flex-direction:column;gap:clamp(5px,.75vh,10px)}
+.tl-row{
+  display:grid;grid-template-columns:clamp(94px,10.5vw,146px) 1fr;
+  gap:clamp(10px,1.35vw,22px);align-items:center;
+  background:var(--surface);border-radius:11px;
+  padding:clamp(6px,.72vw,11px) clamp(12px,1.35vw,20px);
+  box-shadow:var(--shadow);border-left:7px solid var(--line);
+}
+.tl-row.is-key{border-left-color:var(--flame)}
+.tl-row.is-cty{border-left-color:var(--deep)}
+.tl-date{font-family:var(--hit);font-size:clamp(14px,1.5vw,21px);color:var(--ink-2);letter-spacing:.02em;line-height:1.25}
+.tl-row.is-key .tl-date{color:var(--flame)}
+.tl-row.is-cty .tl-date{color:var(--deep)}
+.tl-body{font-size:clamp(13px,1.22vw,17.5px);color:var(--ink);font-weight:700;line-height:1.5}
+.tl-body small{display:inline;font-weight:400;color:var(--muted);font-size:.86em;line-height:1.5;margin-left:12px}
+
+/* 比例條（成績） */
+.split{display:flex;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);min-height:clamp(48px,5.6vh,74px)}
+.split div{display:grid;place-items:center;text-align:center;padding:8px 10px;line-height:1.35}
+.split b{font-family:var(--hit);font-weight:400;font-size:clamp(17px,1.95vw,28px);display:block}
+.split span{font-size:clamp(11.5px,1.05vw,14.5px);display:block;opacity:.85}
+.split .a{flex:1;background:var(--flame);color:#fff}
+.split .b{flex:1;background:var(--teal);color:#fff}
+.sub3{display:flex;gap:clamp(8px,1.1vw,15px);flex-wrap:wrap}
+.sub3 > div{
+  flex:1;min-width:150px;background:var(--teal-soft);border-radius:11px;
+  padding:clamp(11px,1.3vw,19px);display:flex;flex-direction:column;gap:2px;
+}
+.sub3 b{font-family:var(--hit);font-weight:400;color:var(--teal);font-size:clamp(21px,2.4vw,34px);line-height:1}
+.sub3 span{font-size:clamp(13px,1.22vw,17px);color:var(--ink);font-weight:700}
+.sub3 small{font-size:clamp(11px,1.02vw,13.5px);color:var(--ink-2);line-height:1.5}
+
+/* 互動模擬 */
+.sim{
+  background:var(--surface);border-radius:16px;box-shadow:var(--shadow);
+  padding:clamp(13px,1.5vw,22px);display:flex;flex-direction:column;gap:clamp(9px,1.1vw,15px);
+}
+.sim-ctrl{display:flex;flex-wrap:wrap;gap:clamp(11px,1.5vw,26px);align-items:flex-end}
+.sim-ctrl label{display:flex;flex-direction:column;gap:5px;flex:1;min-width:190px}
+.sim-ctrl .lab{font-size:clamp(12.5px,1.13vw,16px);color:var(--ink);font-weight:700;line-height:1.4}
+.sim-ctrl .lab b{font-family:var(--hit);font-weight:400;font-variant-numeric:tabular-nums;font-size:1.35em;margin:0 .1em}
+.sim-ctrl .lab.r b{color:var(--flame)}
+.sim-ctrl .lab.l b{color:var(--deep)}
+.sim-ctrl input[type=range]{width:100%;accent-color:var(--flame);cursor:pointer;height:22px}
+.sim-svg{width:100%;height:auto;aspect-ratio:1000/160;max-height:30vh;display:block;background:var(--ground);border-radius:11px}
+.sim-out{display:flex;gap:clamp(9px,1.2vw,17px);flex-wrap:wrap}
+.sim-out > div{
+  flex:1;min-width:158px;border-radius:11px;padding:clamp(9px,1.1vw,16px) clamp(12px,1.3vw,19px);
+  display:flex;flex-direction:column;gap:1px;
+}
+.sim-out .path{background:var(--sun-soft)}
+.sim-out .disp{background:var(--flame-soft)}
+.sim-out span{font-size:clamp(11.5px,1.05vw,14.5px);color:var(--ink-2);font-weight:700;letter-spacing:.04em}
+.sim-out b{font-family:var(--hit);font-weight:400;font-variant-numeric:tabular-nums;font-size:clamp(23px,2.6vw,38px);line-height:1.1}
+.sim-out .path b{color:var(--sun)}
+.sim-out .disp b{color:var(--flame)}
+.sim-out b i{font-style:normal;font-size:.44em;color:var(--muted);margin-left:.25em}
+.sim-btn{
+  font-family:var(--hit);letter-spacing:.07em;font-size:clamp(13px,1.25vw,17px);
+  background:var(--flame);border:0;color:#fff;border-radius:999px;
+  padding:9px 22px;cursor:pointer;line-height:1.6;white-space:nowrap;
+}
+.sim-btn:hover{background:var(--ink)}
+.sim-btn:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+
+/* 深色網站框裡的粗體字要反白，否則深底深字看不見 */
+.link-box .note strong{color:#fff}
+/* 參考檔只定義到第 5 個標籤的底線顏色，補滿 */
+.unit-chip:nth-child(6){border-bottom:4px solid var(--sun)}
+.unit-chip:nth-child(7){border-bottom:4px solid var(--teal)}
+.unit-chip:nth-child(8){border-bottom:4px solid var(--deep)}
+.unit-chip:nth-child(9){border-bottom:4px solid var(--flame)}
+
+/* 網站列（精簡版） */
+.link-box.is-slim{padding:clamp(12px,1.35vw,20px);gap:clamp(11px,1.4vw,22px)}
+.link-box.is-slim .qr{width:clamp(74px,7.4vw,102px)}
+.link-box.is-slim .link-url{font-size:clamp(15px,1.72vw,24px)}
+
+/* 結尾頁：參考檔的 max-width:19ch 以數字寬計算，中文會被提前斷行；已用 <br> 控制斷行 */
+.closing h2{max-width:none}
+
+/* 兩欄敘述 */
+.who{display:flex;flex-direction:column;gap:clamp(8px,1.05vw,14px)}
+.who-row{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(12px,1.55vw,24px);align-items:center;
+  background:var(--surface);border-radius:13px;box-shadow:var(--shadow);
+  padding:clamp(11px,1.3vw,20px) clamp(13px,1.5vw,24px);
+}
+.who-n{
+  font-family:var(--hit);font-weight:400;line-height:1;
+  font-size:clamp(26px,3.1vw,46px);color:#fff;background:var(--flame);
+  border-radius:12px;width:clamp(96px,10.2vw,148px);text-align:center;
+  padding:clamp(9px,1vw,15px) clamp(8px,.9vw,14px);
+}
+.who-n small{display:block;font-size:.33em;letter-spacing:.06em;opacity:.9;margin-top:3px}
+.who-n.is-word{font-size:clamp(18px,2vw,28px);padding-top:clamp(13px,1.45vw,21px);padding-bottom:clamp(13px,1.45vw,21px)}
+.who-row.is-mid .who-n{background:var(--sun);color:var(--ink)}
+.who-row.is-low .who-n{background:var(--muted)}
+.who-row.is-good .who-n{background:var(--teal)}
+.who-b h3{font-size:clamp(15px,1.55vw,22px);margin-bottom:2px}
+.who-b p{font-size:clamp(13px,1.2vw,17px)}
+
+@media (max-width:840px){
+  .who-row{grid-template-columns:1fr}
+  .who-n{width:auto;justify-self:flex-start;padding-left:18px;padding-right:18px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <section class="slide cover is-current">
+    <div class="tag">115 學年度第一學期　親師座談會</div>
+    <h1>我教的不是解題，<br><span class="burst">是怎麼想。</span></h1>
+    <div class="cover-strip"><i></i><i></i><i></i></div>
+    <p class="lede">這 10 分鐘，我想跟您報告三件事：<strong>孩子在課堂上的真實樣子</strong>、<strong>這學期到會考的規劃</strong>，還有<strong>我希望家裡怎麼幫忙</strong>。</p>
+    <div class="cover-meta">
+      <span class="chip">910 班　國三理化</span>
+      <span class="chip">李智瑋 老師</span>
+      <span class="chip">2026.9.17</span>
+      <span class="chip">翰林版</span>
+      
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="tag">先說說這個班</div>
+    <h2>一節課裡，<br>其實有三種不同的孩子</h2>
+    <div class="who">
+      <div class="who-row is-good">
+        <div class="who-n">6–8<small>位</small></div>
+        <div class="who-b">
+          <h3>眼神一直跟著我</h3>
+          <p>問問題會認真回，我丟出去的東西接得住。這群孩子交代的作業也都努力完成了。</p>
+        </div>
+      </div>
+      <div class="who-row is-mid">
+        <div class="who-n is-word">大多數<small>其餘同學</small></div>
+        <div class="who-b">
+          <h3>有在聽，但注意力容易被帶走</h3>
+          <p>斷斷續續 —— 旁邊一有動靜就容易分心，過一下又接回來。<strong>這群是我這學期最主要的工作對象</strong>，他們不是不想學，是還沒有辦法自己穩住。</p>
+        </div>
+      </div>
+      <div class="who-row is-low">
+        <div class="who-n">6–8<small>位</small></div>
+        <div class="who-b">
+          <h3>注意力還沒有放在課堂上</h3>
+          <p>這群孩子我不會放掉。比起用高壓把他們押回來，<strong>我更想把課上得值得他抬頭看一下</strong> —— 這也是我做那些互動模擬的原因之一。</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">我把這頁放在最前面，是因為我希望您聽到的是<strong>真實的樣子</strong>，而不是一句「還不錯」。這裡說的是課堂的整體樣貌，<strong>不針對任何一個孩子</strong>。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-sun">但我最想講的是這件事</div>
+    <h2>這個班的腦袋，<em>天馬行空</em></h2>
+    <div class="quotes">
+      <div class="quote">
+        <q>老師，那我自己買器材來給大家做，好不好？</q>
+        <cite>910　某次課堂討論</cite>
+      </div>
+    </div>
+    <p class="lede">之前聊到暑假想做<strong>「用太陽能煮蛋」</strong>的實驗，我原本只是隨口丟出來，結果整班認真討論了起來 —— 要準備什麼材料、怎麼聚光、天氣不好怎麼辦，一個問題接一個問題自己冒出來。最後卡在學校沒有器材，實驗沒能做成，<strong>但那節課我記得很清楚。</strong></p>
+    <div class="pair" style="grid-template-columns:1fr 1fr">
+      <div class="pair-side said">
+        <div class="pair-tag">如果只看作業繳交</div>
+        <p>會覺得這個班不夠認真。</p>
+      </div>
+      <div class="pair-side did">
+        <div class="pair-tag">但我看到的是</div>
+        <p>好奇心一點都不缺，<strong>缺的是把好奇心接回課本的那條路</strong>。那條路是我的工作。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="tag">卡關點 一</div>
+    <h2>他們不是不會，<br>是<em>看不懂題目在問什麼</em></h2>
+    <p class="lede">這是我在兩個班都看到的同一件事：題目一長、情境一多，孩子還沒開始想就先放棄了。可是<strong>會考現在幾乎全是這種題目</strong> —— 一大段生活情境，真正要用的觀念其實很淺。</p>
+    <div class="pair">
+      <div class="pair-side said">
+        <div class="pair-tag">孩子看到的</div>
+        <p>「這題好長，我不想看。」</p>
+        <p>「字太多了，我看不懂。」</p>
+        <p>「我不知道它到底要問什麼。」</p>
+      </div>
+      <div class="arrow">→</div>
+      <div class="pair-side did">
+        <div class="pair-tag">我在課堂上做的</div>
+        <p>◆ 帶著全班<strong>圈出關鍵字</strong>，把題幹一句一句拆開</p>
+        <p>◆ 先問「這題在問什麼」，<strong>不急著算</strong></p>
+        <p>◆ 把長題目翻譯成一句話，再對應回觀念</p>
+      </div>
+    </div>
+    <p class="note">讀題是可以練的。我會把它變成固定的課堂訓練，不是只在考前提醒。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag">卡關點 二</div>
+    <h2>這個班現在最需要補的，<br>是<em>作業的完成度</em></h2>
+    <p class="lede">我想誠實跟各位報告：<strong>910 的作業完成度，是這學期我最想先處理的一件事。</strong>認真的那群孩子都有努力把我安排的份量做完，但目前未完成的比例偏高，而且不是偶爾，是持續的。</p>
+    <div class="grid g2">
+      <div class="card is-sun">
+        <h3>這不只是分數的事</h3>
+        <p>作業佔平時成績的一半，平時成績又佔學期成績一半 —— 沒交的損失比想像中大。但更麻煩的是：<strong>沒寫，我就不知道他哪裡不會</strong>，等到段考才發現就來不及了。</p>
+      </div>
+      <div class="card is-teal">
+        <h3>我會做的</h3>
+        <p>◆ 作業份量控制在合理範圍，寧可少而確實<br>◆ 缺交會主動追，不會讓它默默累積<br>◆ 訂正要求「重想一次」，不接受抄答案</p>
+      </div>
+    </div>
+    <p class="note">這一項我特別需要家裡幫忙 —— 待會最後會具體說明。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-deep">會考長什麼樣</div>
+    <h2>自然科 50 題，<br>理化佔了<em>一半以上</em></h2>
+    <div class="grid g3">
+      <div class="card">
+        <div class="hit">27<small>~30 題</small></div>
+        <div class="hit-label"><strong>理化</strong><br>八、九年級</div>
+      </div>
+      <div class="card is-teal">
+        <div class="hit is-teal">12<small>~15 題</small></div>
+        <div class="hit-label"><strong>生物</strong><br>七年級</div>
+      </div>
+      <div class="card is-sun">
+        <div class="hit is-sun">5<small>~8 題</small></div>
+        <div class="hit-label"><strong>地球科學</strong><br>九年級</div>
+      </div>
+    </div>
+    <div class="quotes">
+      <div class="quote">
+        <q>計算題的比例已經大幅降低，難的是「讀懂情境、選對觀念」。</q>
+        <cite>題目不用難，基礎觀念弄懂最重要</cite>
+      </div>
+    </div>
+    <p class="note">這也是我想先跟您說清楚的：如果補習班給的題目又多又難，孩子寫得很痛苦卻沒有變懂，那不是我們現在需要的。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-teal">這學期</div>
+    <h2>三次段考，走完這些進度</h2>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr><th style="width:118px">定期評量</th><th>理化</th><th>地球科學</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>第一次</th>
+            <td><span class="p">1-1</span> 位置、路徑長與位移<br>→ <span class="p">2-1</span> 慣性定律</td>
+            <td><span class="u">Ch5</span> 地球的環境</td>
+          </tr>
+          <tr>
+            <th>第二次</th>
+            <td><span class="p">2-2</span> 運動定律<br><span class="p">3-3</span> 能量守恆定律與能源</td>
+            <td><span class="u">Ch6</span> 板塊運動與岩層的秘密</td>
+          </tr>
+          <tr>
+            <th>第三次</th>
+            <td><span class="p">3-4</span> 簡單機械<br><span class="p">4-4</span> 歐姆定律與電阻</td>
+            <td><span class="u">Ch7</span> 浩瀚的宇宙</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">國三的難處在於：<strong>新進度要走，舊的四冊也要同時複習</strong>。所以複習測驗的時程會跟段考交錯進行，下一頁是完整的日期。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-sun">成績與教材</div>
+    <h2>分數怎麼算，我先講清楚</h2>
+    <div class="split">
+      <div class="a"><b>定期評量　50%</b><span>三次段考</span></div>
+      <div class="b"><b>平時成績　50%</b><span>下面三項加總</span></div>
+    </div>
+    <div class="sub3">
+      <div><b>50%</b><span>作業</span><small>活動紀錄本、練習卷與訂正。<strong>遲交一天扣 5 分。</strong></small></div>
+      <div><b>30%</b><span>平時測驗</span><small>小考與複習測驗，重點在看哪裡還沒懂。</small></div>
+      <div><b>20%</b><span>學習態度</span><small>小組討論、上課回答問題的參與。</small></div>
+    </div>
+    <div class="units" style="margin-top:2px">
+      <span class="unit-chip">橘子理化複習講義</span>
+      <span class="unit-chip">3800+ 題庫</span>
+      <span class="unit-chip">良師進度</span>
+      <span class="unit-chip">自編活動紀錄本</span>
+    </div>
+    <p class="note">平時成績佔一半，而且一半是作業 —— 這是刻意的。<strong>國三這一年，穩定交、認真訂正的孩子，成績自然會被拉上來。</strong></p>
+  </section>
+
+  <section class="slide">
+    <div class="tag">複習測驗時程</div>
+    <h2>從 10 月到寒輔的完整時程</h2>
+    <div class="tl">
+      <div class="tl-row is-key"><div class="tl-date">10/14–15</div><div class="tl-body">第一次段考<small>B5（第五冊）本學期進度</small></div></div>
+      <div class="tl-row"><div class="tl-date">10/29–30</div><div class="tl-body">複習測驗<small>B2、B4</small></div></div>
+      <div class="tl-row is-key"><div class="tl-date">12/1–2</div><div class="tl-body">第二次段考<small>B5（第五冊）</small></div></div>
+      <div class="tl-row"><div class="tl-date">12/5</div><div class="tl-body">複習測驗<small>B1–B4 全範圍</small></div></div>
+      <div class="tl-row is-cty"><div class="tl-date">12/23–24</div><div class="tl-body">縣　測<small>B1–B4 全範圍．全縣一起考，會考前最重要的一次定位</small></div></div>
+      <div class="tl-row is-key"><div class="tl-date">1/14–15</div><div class="tl-body">第三次段考<small>B5（第五冊）</small></div></div>
+      <div class="tl-row"><div class="tl-date">1/25–29</div><div class="tl-body">寒假輔導<small>接續第五冊與總複習</small></div></div>
+      <div class="tl-row"><div class="tl-date">1/30</div><div class="tl-body">複習測驗<small>B5</small></div></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-teal">我怎麼教</div>
+    <h2>丟問題讓他們想，<br>而不是直接給答案</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>先丟問題，讓他們自己想</h3>
+          <p>我很少一開始就給結論。我會先丟一個情境問全班，讓他們猜、讓他們吵，猜錯的過程本身就是在建立觀念。<strong>自己想過一次的東西，才不會考完就忘。</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>從生活實例與繪圖切入</h3>
+          <p>公式先放一邊。先讓他們看到畫面 —— 車子怎麼動、力往哪裡推、電流怎麼走，<strong>畫得出來，才代表真的懂</strong>，然後公式自然就有意義了。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>看不見的，我做成可以動的模擬</h3>
+          <p>理化最難的地方是很多東西看不見：看不見的力、看不見的電流、只能靠想像的光路與月相。所以我自己寫了一整套互動模擬工具，<strong>課堂上當場演示，孩子也能用自己的載具動手調</strong>。</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">這三件事指向同一個目標：讓孩子「想通」，而不是「背起來」。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag">現場示範　第一次段考 1-1</div>
+    <h2><em>路徑長</em> 和 <em>位移</em>，差在哪？</h2>
+    <div class="sim">
+      <div class="sim-ctrl">
+        <label>
+          <span class="lab r">第一段：向右走 <b id="v1">8</b> 公尺</span>
+          <input type="range" id="s1" min="1" max="10" step="1" value="8" aria-label="第一段向右走幾公尺">
+        </label>
+        <label>
+          <span class="lab l">第二段：往回走 <b id="v2">3</b> 公尺</span>
+          <input type="range" id="s2" min="0" max="10" step="1" value="3" aria-label="第二段往回走幾公尺">
+        </label>
+        <button class="sim-btn" id="simPlay" type="button">▶　走一次</button>
+      </div>
+
+      <svg class="sim-svg" viewBox="0 0 1000 160" role="img" aria-label="路徑長與位移的互動示意圖">
+        <line x1="80" y1="95" x2="980" y2="95" stroke="var(--line)" stroke-width="3"/>
+        <g font-family="var(--hit)" font-size="16" fill="var(--muted)" text-anchor="middle">
+          <line x1="230" y1="89" x2="230" y2="101" stroke="var(--line)" stroke-width="3"/><text x="230" y="122">0</text>
+          <line x1="374" y1="89" x2="374" y2="101" stroke="var(--line)" stroke-width="3"/><text x="374" y="122">2</text>
+          <line x1="518" y1="89" x2="518" y2="101" stroke="var(--line)" stroke-width="3"/><text x="518" y="122">4</text>
+          <line x1="662" y1="89" x2="662" y2="101" stroke="var(--line)" stroke-width="3"/><text x="662" y="122">6</text>
+          <line x1="806" y1="89" x2="806" y2="101" stroke="var(--line)" stroke-width="3"/><text x="806" y="122">8</text>
+          <line x1="950" y1="89" x2="950" y2="101" stroke="var(--line)" stroke-width="3"/><text x="950" y="122">10 m</text>
+        </g>
+
+        <path id="legA" fill="none" stroke="var(--sun)" stroke-width="6" stroke-linecap="round"/>
+        <path id="legB" fill="none" stroke="var(--sun)" stroke-width="6" stroke-linecap="round" stroke-dasharray="11 8"/>
+        <text x="80" y="28" font-family="var(--hit)" font-size="18" fill="var(--sun)">走過的路徑＝路徑長</text>
+
+        <path id="dispArrow" fill="none" stroke="var(--flame)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <text id="dispLabel" y="155" font-family="var(--hit)" font-size="19" fill="var(--flame)" text-anchor="middle"></text>
+
+        <g id="walker" style="transition:transform 340ms cubic-bezier(.3,.7,.3,1)">
+          <circle cx="0" cy="-15" r="14" fill="var(--flame)"/>
+          <circle cx="0" cy="0" r="5" fill="var(--flame)"/>
+        </g>
+      </svg>
+
+      <div class="sim-out">
+        <div class="path"><span>路徑長（總共走了多遠）</span><b id="oPath">11<i>公尺</i></b></div>
+        <div class="disp"><span>位移（起點到終點的直線）</span><b id="oDisp">5<i id="dispDir">向右</i></b></div>
+      </div>
+    </div>
+    <p class="note">把「往回走」拉到跟第一段一樣多，位移就變成 0 —— 孩子自己拉一次，就不需要背定義了。這一頁只是其中一個，網站上還有 36 個。</p>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-teal">課堂工具</div>
+    <h2>我自己做了 <em>36 個</em> 互動模擬工具</h2>
+    <p class="lede">從月相、板塊到電流與透鏡成像，<strong>凡是課本上只能用文字描述的，我都想辦法做成可以動的</strong>。這些都是我利用課餘時間自己寫的，全部公開，孩子在家用手機就能打開。</p>
+    <div class="units">
+      <span class="unit-chip">運動學 3</span>
+      <span class="unit-chip">電磁學 8</span>
+      <span class="unit-chip">光學 9</span>
+      <span class="unit-chip">熱學 3</span>
+      <span class="unit-chip">地球科學 3</span>
+      <span class="unit-chip">化學反應 2</span>
+      <span class="unit-chip">波與聲音 2</span>
+      <span class="unit-chip">力學 1</span>
+      <span class="unit-chip">班級經營 5</span>
+    </div>
+    <div class="link-box is-slim">
+      <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYMAAAGDAQAAAADhH0G/AAADKUlEQVR42u1cMbKjUAyTIDOkIzcgN3m5GeRm5CZwA+hglqAt/CDZ8s823h1TJQQ18thYll8o/OwaC/z0CkQgAhGI/xsx0q7HSF4APHkHIAIYbysL4JmfCK6cImpJUodGWgug7QG8S7F73fNjSZL24MotYrX8Gnktd7BLL17LN9UBZzJaegZXzhH1AlFkmlaWwvPRTNVGBVeOEZfvL83I8heI1GO5igAw38Dgyj+ikgRgbLSWUgfM9QYA6XXLVbSRtuDKLWImSXYA1upNAGMzVzvUAfVS7gBeJFkEVw4R0Nc11AsotBpQaQeQhnop9cc1BLsOI/hpVyrtkDTYb62GOhfPZkJpPwW7HnNwAYC2t5qpLg2oNiBnJSD1zXTcCXb9RdAyTt2RaMcHE/IbpS4N58PBrssqqh1oleOlHsh1tZmsrvaopaiijjuZjVKHZjJZkTThbGk22p1qY3QyThHjDRCpfmwWiOpebJZjqrZmWXGM14Jdv1XUZDt1ZqWNuMtcRZfoRf0i6vkCSL1lHLs84rbUexdgB+tFgyvfOZhM0Z/SXl0aatnArZmiF3WtJnKFNEXfASbkWw2nQowq6lwP2kwmW71JsnFontKgDUXvPIJZ9GUDou0tlDZVy1VUkYOOI/gJk46mdAEFpHNck9MzIujbm1Aulb29B21kWp4aP6qo314U5bHpZOO1PIppc2CtrsZ70POu2kpSGrBeKNs2zMbubb0AYvvpdoJdl4hSwvMBVGsBAM20XkQbh64FqDycCa7c+oPl2XnuUJcOzzdlh7ftEe6S7150OzrP8vut9+VWfDzfYNfrloUN00p9PqDNYj+79uEueffok779QeBbIYYe/Ed21bK7dBi7QN6TOV6REUG4PruE+Vq+iSfv2dhNpvHxfABr7Iv6P7tkRqF5vGsB6mmhPHvR4Aq+zy7ZOReR95nVDrEd5noDSN7n2manwa5nxHjDm6R61MubzOcHbd2inuMEqH9EM7KSxHaYr8fqL94FgGR3git4P7u0QKSelnpUD9h4LS9BBVee9aBNQZV3KvKWxdcKTXgTPhGM/5MJRCACEYi/QPwGBG4XyIIrX8sAAAAASUVORK5CYII=" alt="智瑋的理化課輔助工具 QR code" width="132" height="132">
+      <div>
+        <div class="link-kicker">智瑋的理化課輔助工具</div>
+        <a class="link-url" href="https://sites.google.com/sljh.hcc.edu.tw/optics" target="_blank" rel="noopener">sites.google.com/sljh.hcc.edu.tw/optics</a>
+        <p class="note" style="margin-top:6px">歡迎現在就掃，回家跟孩子一起打開來玩。<strong>看他操作、聽他解釋給您聽</strong>，比問「今天上什麼」有用得多。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="tag is-sun">想請您幫的三件事</div>
+    <h2>這一年，孩子需要家裡的配合</h2>
+    <div class="asks">
+      <div class="ask">
+        <div class="ask-mark">1</div>
+        <div class="ask-body">
+          <h3>盯訂正，不要盯分數</h3>
+          <p>考卷發回來，分數看過就好。<strong>真正要問的是「這題你現在會了嗎」</strong>。訂正如果只是把答案抄上去，那張考卷就白考了 —— 請幫我看一下，孩子的訂正是抄的，還是真的重想了一次。</p>
+        </div>
+      </div>
+      <div class="ask">
+        <div class="ask-mark">2</div>
+        <div class="ask-body">
+          <h3>盯作息與 3C，顧好體力和情緒</h3>
+          <p>國三這一年拼的其實是耐力。<strong>睡不飽的孩子，坐在教室裡也吸收不了</strong>。手機和睡眠請務必幫忙守住，這件事學校真的做不到，只能靠家裡。</p>
+        </div>
+      </div>
+      <div class="ask">
+        <div class="ask-mark">3</div>
+        <div class="ask-body">
+          <h3>鼓勵孩子直接來問我</h3>
+          <p>下課、午休、放學，任何時間都可以來找我，<strong>問多笨的問題我都不會生氣</strong>。孩子最常見的狀況不是不敢問，是覺得「算了，反正下次再說」—— 麻煩您在家推他一把。</p>
+        </div>
+      </div>
+    </div>
+    <p class="note">這三件事裡，<strong>910 我最想拜託的是第一件和第三件</strong> —— 訂正，還有讓孩子願意開口問。</p>
+  </section>
+
+  <section class="slide closing">
+    <div class="tag">最後</div>
+    <h2>我教的不是解題，<span class="burst" style="color:var(--flame)">是怎麼想</span>。<br>帶孩子把理化想通，<br>而不是背起來。</h2>
+    <div class="cover-strip"><i></i><i></i><i></i></div>
+    <p class="lede">910 的孩子好奇心是夠的，也願意討論。<br>接下來這一年，我會把那份好奇心，一步一步接回課本上。</p>
+    <p class="note">任何時候想聊孩子的狀況，歡迎隨時找我。謝謝各位。</p>
+  </section>
+
+</div>
+
+<div class="hud">
+  <div class="hud-btns">
+    <button class="hud-btn" id="prev" aria-label="上一頁">← 上一頁</button>
+    <button class="hud-btn" id="next" aria-label="下一頁">下一頁 →</button>
+    <button class="hud-btn" id="fs" aria-label="全螢幕">全螢幕</button>
+    <button class="hud-btn" id="theme" aria-label="切換為暗色">暗色</button>
+  </div>
+  <div class="progress" role="progressbar" aria-label="簡報進度"><div class="progress-fill" id="pf"></div></div>
+  <div class="counter" id="counter">1 / 14</div>
+</div>
+
+<script>
+
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var i = 0;
+  var pf = document.getElementById('pf');
+  var counter = document.getElementById('counter');
+
+  function show(n, push){
+    i = Math.max(0, Math.min(total - 1, n));
+    slides.forEach(function(s, k){ s.classList.toggle('is-current', k === i); });
+    pf.style.width = ((i + 1) / total * 100) + '%';
+    counter.textContent = (i + 1) + ' / ' + total;
+    if (push !== false) {
+      try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+    }
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+
+  function fromHash(){
+    var m = /^#(\d+)$/.exec(location.hash || '');
+    return m ? (parseInt(m[1], 10) - 1) : 0;
+  }
+
+  document.getElementById('prev').addEventListener('click', function(){ show(i - 1); });
+  document.getElementById('next').addEventListener('click', function(){ show(i + 1); });
+  document.getElementById('fs').addEventListener('click', function(){
+    try {
+      if (document.fullscreenElement) { document.exitFullscreen(); }
+      else { document.documentElement.requestFullscreen(); }
+    } catch (e) {}
+  });
+
+  /* 亮／暗色：預設亮色（投影用），按鈕可切換並記住 */
+  var root = document.documentElement;
+  var tbtn = document.getElementById('theme');
+  function applyTheme(t){
+    root.setAttribute('data-theme', t);
+    tbtn.textContent = (t === 'dark') ? '亮色' : '暗色';
+    tbtn.setAttribute('aria-label', (t === 'dark') ? '切換為亮色' : '切換為暗色');
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('deck-theme'); } catch (e) {}
+  applyTheme(saved === 'dark' ? 'dark' : 'light');
+  tbtn.addEventListener('click', function(){
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('deck-theme', next); } catch (e) {}
+  });
+
+  document.addEventListener('keydown', function(e){
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    switch (e.key) {
+      case 'ArrowRight': case 'PageDown': case ' ': case 'Enter':
+        e.preventDefault(); show(i + 1); break;
+      case 'ArrowLeft': case 'PageUp': case 'Backspace':
+        e.preventDefault(); show(i - 1); break;
+      case 'Home': e.preventDefault(); show(0); break;
+      case 'End': e.preventDefault(); show(total - 1); break;
+    }
+  });
+
+  window.addEventListener('hashchange', function(){ show(fromHash(), false); });
+  show(fromHash(), false);
+})();
+
+
+(function(){
+  var s1=document.getElementById('s1'), s2=document.getElementById('s2');
+  if(!s1) return;
+  var v1=document.getElementById('v1'), v2=document.getElementById('v2');
+  var oPath=document.getElementById('oPath'), oDisp=document.getElementById('oDisp');
+  var dispDir=document.getElementById('dispDir');
+  var legA=document.getElementById('legA'), legB=document.getElementById('legB');
+  var dispArrow=document.getElementById('dispArrow'), dispLabel=document.getElementById('dispLabel');
+  var walker=document.getElementById('walker');
+  var btn=document.getElementById('simPlay');
+
+  var X0=230, PXM=72, Y=95;            // 0 公尺的 x、每公尺像素、基準線 y
+  function px(m){ return X0 + m*PXM; }
+
+  function arc(from,to,lift){
+    var x1=px(from), x2=px(to), mx=(x1+x2)/2;
+    return 'M '+x1+' '+Y+' Q '+mx+' '+(Y-lift)+' '+x2+' '+Y;
+  }
+
+  var playing=false, t1=null, t2=null;
+
+  function moveWalker(m, ms){
+    walker.style.transitionDuration = (ms == null ? 340 : ms) + 'ms';
+    walker.style.transform = 'translate(' + px(m) + 'px,' + Y + 'px)';
+  }
+
+  function render(){
+    var a=+s1.value, b=+s2.value;
+    if(b > a+2){ b = a+2; s2.value = b; }   // 最多只能往回走過起點 2 公尺
+    var end=a-b, path=a+b;
+    v1.textContent=a; v2.textContent=b;
+
+    legA.setAttribute('d', arc(0,a,48));
+    legB.setAttribute('d', b>0 ? arc(a,end,48) : 'M '+px(a)+' '+Y+' L '+px(a)+' '+Y);
+    legB.style.opacity = b>0 ? 1 : 0;
+
+    oPath.firstChild.nodeValue = path;
+
+    var ax1=px(0), ax2=px(end), ay=Y+38;
+    if(Math.abs(end)<0.01){
+      dispArrow.setAttribute('d','M '+ax1+' '+ay+' L '+ax1+' '+ay);
+      dispArrow.style.opacity=0;
+    }else{
+      var dir = end>0 ? -13 : 13;
+      dispArrow.setAttribute('d','M '+ax1+' '+ay+' L '+ax2+' '+ay+' M '+(ax2+dir)+' '+(ay-9)+' L '+ax2+' '+ay+' L '+(ax2+dir)+' '+(ay+9));
+      dispArrow.style.opacity=1;
+    }
+    dispLabel.setAttribute('x', (ax1+ax2)/2);
+    dispLabel.textContent = Math.abs(end)+' m';
+    dispLabel.style.opacity = Math.abs(end)<0.01 ? 0 : 1;
+
+    oDisp.firstChild.nodeValue = Math.abs(end);
+    dispDir.textContent = Math.abs(end)<0.01 ? '回到原點' : (end>0 ? '向右' : '向左');
+
+    if(!playing) moveWalker(end);
+  }
+
+  /* 走一次：回起點 → 走第一段 → 走第二段。
+     刻意不用 requestAnimationFrame —— 投影或分頁未被合成時 rAF 會被凍住，動畫會整個不動。 */
+  function play(){
+    clearTimeout(t1); clearTimeout(t2);
+    var a=+s1.value, b=Math.min(+s2.value, +s1.value+2), end=a-b;
+    playing=true;
+    moveWalker(0, 0);
+    t1=setTimeout(function(){
+      moveWalker(a, 900);
+      t2=setTimeout(function(){
+        moveWalker(end, b>0 ? 700 : 0);
+        playing=false;
+      }, 960);
+    }, 40);
+  }
+
+  s1.addEventListener('input', render);
+  s2.addEventListener('input', render);
+  btn.addEventListener('click', play);
+  render();
+})();
+
+</script>
+</body>
+</html>
