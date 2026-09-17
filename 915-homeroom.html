@@ -315,6 +315,24 @@ table.data td.n{text-align:right; font-variant-numeric:tabular-nums;}
 .trace-node{cursor:pointer;}
 .trace-node circle{transition:r .18s, fill .18s;}
 .trace-node:hover circle{r:15;}
+/* -- 第 7 頁：全年級對照（低調切換鈕，預設收起） -- */
+.gradebtn{
+  position:absolute; top:0; right:2px; z-index:2;
+  font-size:15px; font-weight:700; color:var(--muted);
+  background:transparent; border:1px solid var(--line); border-radius:999px;
+  padding:3px 10px; cursor:pointer; opacity:.5;
+  transition:opacity .15s, color .15s, border-color .15s;
+}
+.gradebtn:hover{opacity:1; color:var(--brand);}
+.gradebtn[aria-pressed="true"]{opacity:1; color:var(--brand); border-color:var(--brand);}
+.gradenote{margin:2px 0 0; font-size:16px; line-height:1.4; color:var(--ink2);}
+.gradenote span{display:block; color:var(--muted); font-size:15px;}
+.gradenote .gkey{display:inline-block; width:26px; height:0; vertical-align:middle;
+  border-top:3px dashed #8A8075; margin-right:6px;}
+.gradenote .gdiff{color:#3F7A47;}
+@keyframes riseFade{from{opacity:0} to{opacity:1}}
+#riseSvg .gradeg{animation:riseFade .35s ease-out both;}
+
 /* -- 第 8 頁 登入 -- */
 .qrbox{
   width:300px; height:300px; background:#fff; border:1px solid var(--line); border-radius:14px;
@@ -788,7 +806,7 @@ img{max-width:100%;}
         暑假的第一場模擬考。九年級這一年，是從這一天開始的。</div>
       <div class="coverqr">
         <div class="qrbox" id="qrCover"></div>
-        <div class="cqtext">四份簡報<br>掃這裡都看得到</div>
+        <div class="cqtext">這份簡報<br>可以掃回家看</div>
       </div>
     </div>
   </div>
@@ -873,7 +891,7 @@ img{max-width:100%;}
 <!-- ============================================================
      第 5 頁：關於「吵」這件事
      ============================================================ -->
-<section class="slide" id="s5" data-title="關於「吵」這件事" data-min="2">
+<section class="slide" id="s5" data-title="關於「吵」這件事" data-min="1.75">
   <div class="slide-head"><h2 class="t1">你們可能聽過：915 很吵</h2>
     <span class="tag">全場最重要</span></div>
   <p class="lead">我不否認，音量是真的大 —— 但我想講音量從哪裡來。</p>
@@ -938,7 +956,7 @@ img{max-width:100%;}
 <!-- ============================================================
      第 7 頁：這不是我的感覺，是數字
      ============================================================ -->
-<section class="slide" id="s7" data-title="這不是我的感覺，是數字" data-min="2.25">
+<section class="slide" id="s7" data-title="這不是我的感覺，是數字" data-min="2">
   <div class="slide-head"><h2 class="t1">這不是我的感覺，是數字</h2>
     <span class="tag">全場最想給你們看的一頁</span></div>
   <p class="lead">九年級開學以來六次模擬考，915 的<b>班平均一路往上</b> —— 全班 30 個人算出來的。</p>
@@ -949,20 +967,23 @@ img{max-width:100%;}
       <div class="pcap"><b>暑假，被講義淹沒的日子</b>這一排，是一個暑假留下的痕跡。</div>
     </div>
     <div class="arrowcol"><div class="ar">→</div><div class="al">換來這條線</div></div>
-    <div class="fill svg-scroll" style="display:flex;flex-direction:column;min-height:0">
+    <div class="fill svg-scroll" style="display:flex;flex-direction:column;min-height:0;position:relative">
+      <button class="gradebtn" id="toggleGrade" aria-pressed="false">＋ 加上全年級</button>
       <svg id="riseSvg" viewBox="0 0 700 300" style="width:100%;height:100%"
-           role="img" aria-label="915 九年級六次模擬考的班平均與及格率上升折線圖"></svg>
+           role="img" aria-label="915 九年級六次模擬考的班平均與達到 60 分人數的折線圖"></svg>
+      <p class="gradenote" id="gradeNote" hidden><i class="gkey"></i>全年級平均　<b class="gdiff">綠色</b>＝我們班高出年級幾分。兩條線一起往上，主要是各次模考難度不同。真正要看的是差距 —— 六次都在年級平均之上。<span>＊9/8 全年級僅 143 人已輸入，僅供參考。</span></p>
     </div>
     <div style="flex:0 0 296px;display:flex;flex-direction:column;gap:9px">
       <div class="bignum">
         <div class="bn">+9.5 分</div>
         <div class="bl">班平均　62.0 → 71.5</div>
         <div class="bs">第一次模考 → 9/8 模考</div>
+        <div class="bs" style="color:var(--muted)">全年級同期也從 59.2 → 66.6</div>
       </div>
       <div class="bignum">
-        <div class="bn">+26.7</div>
-        <div class="bl">及格率　50% → 76.7%</div>
-        <div class="bs">個百分點（60 分以上的人數比例）</div>
+        <div class="bn" style="font-size:40px">14 人 → 23 人</div>
+        <div class="bl">平均達到 60 分的人數</div>
+        <div class="bs">第一次模考 28 人完成全科，9/8 為 30 人</div>
       </div>
       <div class="card" style="padding:9px 14px">
         <div class="t3" style="font-size:21px;margin-bottom:2px">拉最多的兩科</div>
@@ -977,7 +998,7 @@ img{max-width:100%;}
 <!-- ============================================================
      第 8 頁：915 vs 全年級
      ============================================================ -->
-<section class="slide" id="s7b" data-title="915 vs 全年級" data-min="1.5">
+<section class="slide" id="s7b" data-title="915 vs 全年級" data-min="1.25">
   <div class="slide-head"><h2 class="t1 small">915 vs 全年級：十個科目全部在平均之上</h2>
     <span class="tag">九年級後・19 班齊備的 8 場</span></div>
   <div class="fill svg-scroll" style="min-height:0">
@@ -1077,7 +1098,7 @@ img{max-width:100%;}
 <!-- ============================================================
      第 11 頁：【互動】趨勢圖怎麼看
      ============================================================ -->
-<section class="slide" id="s10" data-title="【互動】趨勢圖怎麼看" data-min="1.5" data-demo="1">
+<section class="slide" id="s10" data-title="【互動】趨勢圖怎麼看" data-min="1.25" data-demo="1">
   <div class="demo-bar">真實資料，已匿名處理 ── 畫面上不會出現任何姓名或座號</div>
   <div class="slide-head" style="margin-bottom:6px">
     <h2 class="t1 small">趨勢圖怎麼看</h2>
@@ -1149,27 +1170,28 @@ img{max-width:100%;}
      ============================================================ -->
 <section class="slide" id="s13b" data-title="一科要一起盯：數學" data-min="0.5">
   <div class="slide-head"><h2 class="t1">一科要一起盯：數學</h2>
-    <span class="tag">全班及格率最低的一科</span></div>
+    <span class="tag">全班達 60 分比例最低的一科</span></div>
 
   <div class="row sciline" style="align-items:center;gap:14px">
     <p class="small" style="margin:0;flex:1">
       自然的部分，我剛剛那節已經完整說明過了，這裡不重複。</p>
     <a class="btn ghost" href="https://sunny30119.github.io/sljh-parents/915.html" target="_blank" rel="noopener">想再看一次 →</a>
+    <button class="btn ghost" id="toSeniors" style="font-size:20px;padding:9px 16px;white-space:nowrap">學長姐怎麼訂正 →</button>
   </div>
 
   <div class="row" style="flex:1;align-items:stretch;gap:14px;margin-top:14px">
     <div class="bignum mathstat"><div class="bn">62.2</div>
       <div class="bl">九年級後班平均</div><div class="bs bad">十科最低</div></div>
     <div class="bignum mathstat"><div class="bn">55.2%</div>
-      <div class="bl">平均及格率</div><div class="bs bad">十科最低</div></div>
+      <div class="bl">平均達 60 分比例</div><div class="bs bad">十科最低</div></div>
     <div class="bignum mathstat"><div class="bn">31%</div>
-      <div class="bl">第一次模考及格率</div><div class="bs bad">數學最低的一次</div></div>
+      <div class="bl">第一次模考達 60 分比例</div><div class="bs bad">數學最低的一次</div></div>
     <div class="bignum mathstat good"><div class="bn">+2.39</div>
       <div class="bl">對全年級平均</div><div class="bs">8 場全贏</div></div>
   </div>
 
   <div class="alert" style="margin-top:16px;font-size:25px;line-height:1.5">
-    這一屆數學普遍難，不是只有我們班。但<b>將近一半的孩子不及格</b>，難不難都得面對。
+    這一屆數學普遍難，不是只有我們班。但<b>將近一半的孩子沒到 60 分</b>，難不難都得面對。
   </div>
 </section>
 
@@ -1255,6 +1277,48 @@ img{max-width:100%;}
 </section>
 
 <!-- ============================================================
+     第 16 頁：變更就學區（新增）
+     ============================================================ -->
+<section class="slide" id="s14b" data-title="變更就學區：學校不會幫你報" data-min="0.5">
+  <div class="slide-head" style="margin-bottom:10px">
+    <h2 class="t1 small">變更就學區：學校不會幫你報</h2>
+    <span class="tag">錯過就要自己跑</span>
+  </div>
+
+  <div class="helpband" style="margin:0 0 14px;font-size:24px;line-height:1.4">
+    這<b>不是學校統一團體報名</b>的項目。過了校內受理的時間，<b>就要家長自己個別去報名</b>。
+  </div>
+
+  <div class="row" style="flex:1;align-items:stretch;gap:16px;min-height:0">
+
+    <div class="fill" style="display:flex;flex-direction:column;min-width:0">
+      <div class="t3" style="margin:0 0 6px">時間往回推</div>
+      <div class="tier"><span class="no">01</span><div><b>最遲三月底</b>　要遷戶籍的，戶籍這時候要遷好，並備妥戶口名簿</div></div>
+      <div class="tier"><span class="no">02</span><div><b>畢業當年 3 月</b>　註冊組調查意願，並協助完成申請流程</div></div>
+      <div class="tier"><span class="no">03</span><div><b>116 年 4 月 8 日</b>　校內申請截止；整個變更就學區是 <b>116 年 4 月</b>辦理</div></div>
+      <div class="quotebar" style="margin-top:auto">
+        戶籍最晚<b>三月底</b>要遷好。四月八號是<b>校內</b>的關門時間，不是外面的。
+      </div>
+    </div>
+
+    <div style="flex:0 0 430px;display:flex;flex-direction:column;min-width:0">
+      <div class="t3" style="margin:0 0 6px">哪些情況用得到</div>
+      <ul class="bullets tight" style="margin:0;font-size:22px">
+        <li>戶籍遷徙</li>
+        <li>返回原戶籍所在地就讀</li>
+        <li>就讀區內未設置之課程群別或產業特殊需求類科</li>
+        <li>特殊理由</li>
+      </ul>
+      <div class="alert" style="margin-top:auto;font-size:20px;padding:10px 14px">
+        ⚠️ <b>通過後無法回到竹苗區選填志願</b>，請慎重考慮。要走這條，先來找我談。
+      </div>
+      <span class="todo" style="font-size:16px;margin-top:6px">【待向註冊組確認：116 年校內截止日 4/8 是否沿用】</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
      第 16 頁：畢業門檻
      ============================================================ -->
 <section class="slide" id="s15" data-title="畢業門檻" data-min="0.5">
@@ -1283,6 +1347,42 @@ img{max-width:100%;}
   <div class="small" style="margin-top:auto">
     <span class="todo">【待老師向教務處確認：領域成績的畢業條件、修業證明書 vs 畢業證書】</span>
     <span class="todo">【待老師向學務處確認：三大過換算與獎懲抵銷、服務時數未做滿的影響】</span>
+  </div>
+</section>
+
+<!-- ============================================================
+     第 18 頁：學長姐說（新增）
+     ============================================================ -->
+<section class="slide" id="s15b" data-title="學長姐說：剛考完的人怎麼做" data-min="0.75">
+  <div class="slide-head" style="margin-bottom:10px">
+    <h2 class="t1 small">學長姐說：剛考完的人怎麼做</h2>
+    <span class="tag">上屆畢業生自己寫的</span>
+    <button class="btn ghost head-right" id="backFromSeniors"
+            style="margin-left:auto;font-size:20px;padding:9px 16px">← 回到剛才那頁</button>
+  </div>
+
+  <div class="row" style="flex:1;align-items:stretch;gap:16px;min-height:0">
+
+    <div style="flex:0 0 556px;display:flex;flex-direction:column;min-width:0">
+      <div class="t3" style="margin:0 0 6px">訂正的三個原則</div>
+      <div class="tier"><span class="no">01</span><div><b>不要只訂正錯的題。</b>只要當下不確定就做記號，最後再一起對 —— 有些是剛好猜對的，那不算會</div></div>
+      <div class="tier"><span class="no">02</span><div><b>保留錯誤的過程，不要擦掉</b>，才知道自己是哪一步歪掉的</div></div>
+      <div class="tier"><span class="no">03</span><div><b>「知道解法但算錯」和「根本不知道怎麼解」，動作不一樣</b>：前者拿白紙重算一次確認是粗心；後者先看詳解弄懂方向，再用自己的方式練一次</div></div>
+      <div class="quotebar" style="margin-top:auto">在原題旁邊，用<b>自己的話</b>寫下解題關鍵和盲點。</div>
+    </div>
+
+    <div class="fill" style="display:flex;flex-direction:column;min-width:0">
+      <div class="t3" style="margin:0 0 6px">另外五句，他們反覆在講</div>
+      <ul class="bullets tight" style="margin:0;font-size:23px">
+        <li>國文形音義每週固定練，錯題本用活頁的；<b>訂正不是抄一次就好</b>，考前要再回顧</li>
+        <li>數學由易到難依序作答，<b>一題卡超過一分鐘就先跳過</b>，非選至少留半小時</li>
+        <li>不要做自己以後不會看的筆記，也<b>不要一直寫已經很會的科目</b></li>
+        <li><b>升英文字母比升加號重要</b>：求穩的科目每天練，要拉的科目間斷加強</li>
+        <li><b>模考重要的是學習，不是分數</b>；考差當下難過可以，但不要帶到隔天</li>
+      </ul>
+      <div class="sig" style="margin-top:auto;font-size:17px">整理自上屆畢業生的分享（916 王煜凱老師提供）</div>
+    </div>
+
   </div>
 </section>
 
@@ -1369,7 +1469,7 @@ img{max-width:100%;}
 <!-- ============================================================
      第 19 頁：班務：班費 ＋ 其他
      ============================================================ -->
-<section class="slide" id="s17" data-title="班務：班費 ＋ 其他" data-min="2">
+<section class="slide" id="s17" data-title="班務：班費 ＋ 其他" data-min="1.75">
   <div class="slide-head"><h2 class="t1">班務</h2>
     <span class="tag">班費請先看這裡</span></div>
   <div id="feeBlock"></div>
@@ -1407,7 +1507,7 @@ img{max-width:100%;}
         <b>「會考與升學完整資訊」是李智瑋老師整理的，僅供參考；實際規定請以官方簡章為準。</b></p>
     </div>
     <div style="flex:0 0 340px;display:flex;flex-direction:column;align-items:center;gap:10px">
-      <div class="t3" style="margin:0">四份簡報都在這裡</div>
+      <div class="t3" style="margin:0">這份簡報，掃這裡</div>
       <div class="qrbox" id="qrSlides"></div>
       <div class="tiny" id="qrSlidesUrl" style="word-break:break-all;text-align:center;max-width:320px;font-size:16px"></div>
       <p class="small" style="text-align:center;margin-top:4px">回家可以慢慢看，裡面有完整行事曆、升學資料跟常見問題。</p>
@@ -1423,11 +1523,11 @@ img{max-width:100%;}
 <div id="progress"></div>
 <div id="pageNo">1 / 20</div>
 <div id="timer"><div class="tot" id="tTot">00:00</div><div class="sub" id="tSub">本頁 00:00 / 0.5 分</div></div>
-<div id="hint">→ 下一頁　S 講稿　T 計時　Esc 總覽　C 待補清單</div>
+<div id="hint">→ 下一頁　S 講稿　T 計時　R 歸零　Esc 總覽　C 待補清單</div>
 
 <div id="notes">
   <div class="nhead">
-    <span class="np" id="nPage">1 / 20</span>
+    <span class="np" id="nPage">1 / 22</span>
     <span class="nt" id="nTitle"></span>
     <span class="nt" id="nMin"></span>
     <span class="nclose">再按一次 S 收起</span>
@@ -1508,14 +1608,23 @@ const CONFIG = {
 
 
 /* ===================================================================
-   第 7 頁：915 九年級六次模擬考的班平均與及格率（真實，班級層級）
+   第 7 頁：915 九年級六次模擬考的班平均與達 60 分人數（真實，班級層級）
    資料來源：915成績統計.json → chart.class_avg / chart.class_pass_rate
    =================================================================== */
 const RISE = {
   labels: ["B1模考","B2模考","B3模考","B4模考","8/31自主","9/8模考"],
   avg:    [61.96, 67.55, 64.68, 66.41, 68.82, 71.47],
-  pass:   [50.0,  66.7,  63.3,  65.5,  70.0,  76.7]
+  pass:   [50.0,  66.7,  63.3,  65.5,  70.0,  76.7],
+  /* 達 60 分的人數／當次完成全科人數（pass 是比例，這是實際人數） */
+  passN:  [14, 20, 19, 19, 21, 23],
+  passOf: [28, 30, 30, 29, 30, 30]
 };
+
+/* 全年級平均（對照用，預設不顯示）。來源：915成績統計.md C-1
+   grade_n 是該次全年級已輸入成績的樣本數；9/8 只有 143 人，對照不可靠。 */
+const GRADE   = [59.24, 65.17, 62.88, 65.67, 66.62, 71.05];
+const GRADE_N = [530, 530, 535, 512, 526, 143];
+let showGrade = false;
 
 /* ===================================================================
    第 8 頁：915 各科班平均 − 全年級平均
@@ -1581,7 +1690,7 @@ const NOTES = {
 
 6:"我的班級經營，從七年級到現在就是三個詞：獨立、自律、暖心。\n\n做法很簡單：我抓住孩子該完成的事情 —— 作業、考試、秩序底線，這三樣抓得很緊；除此之外的，盡量還給他們，讓他們自己學獨立跟自律。框是明確的，但框不大。\n\n這剛好就是陳志恆諮商心理師講的三層規範，第一層該管的底線、第三層要放的自由。用他的話講：放手，不是放生，更不是放棄。\n\n（有時間再補：暖心不是我教的，是他們自己長出來的。）",
 
-7:"這一頁是我今天晚上最想給各位看的。前面講的都是感覺，這一頁我不講感覺，直接給數字。\n\n螢幕上這六個點，是九年級開學以來的六次模擬考，全班三十個人的平均分。第一次模考六十二分，到九月八號那一次七十一點五，九點五分。再看虛線那條，及格率 —— 第一次模考只有一半的孩子及格，到現在是七成七，多了二十六點七個百分點。\n\n拉最多的是兩科：國文從五十八點六到七十六點八，加十八分；數學從五十點七到六十六點六，加十六分。這不是我挑好看的講，這是整班平均，每一個孩子的分數都算在裡面。\n\n但我還是要講那句話：這個班還在進步中，還沒到頂端。我不想今天晚上跟各位說我們班很好了，那不是實話。我要說的是，方向是對的。",
+7:"這條線從 62 分爬到 71.5 分。\n\n我先說清楚這個數字是什麼：是全班三十個人、每個人五科的平均，再平均起來。模考算的是答對幾題，換算成一百分，所以 62 分大概就是平均答對六成。\n\n但我要老實講一件事。這段時間全年級都在往上，不是只有我們班。題目難度每次不一樣，分數本來就會浮動。所以我不會說我們進步得比別人快。\n\n我會說的是這兩件事。\n\n第一，我們班六次模考，每一次都在年級平均之上。沒有一次掉下去。\n\n第二，往上的孩子變多了。平均答對六成以上的，從一半變成四分之三。原本是十四個人，現在是二十三個。\n\n這個對我來說比分數重要。進步的不是幾個人，是一整片。",
 
 8:"再給各位看一張。這是把 915 的班平均，拿去跟全年級十九個班的平均比。十個科目，全部都在年級平均之上。理化多三點五分，歷史三點五，公民三點四，國文和數學各多兩點四 —— 而且國文和數學是八場考試場場都贏，一場都沒輸過。\n\n可是我要很誠實地講一件事，不然這張圖就是騙人的。七年級、八年級那時候，全校只有九到十個班有把成績輸進系統，所以那段時間所謂的「年級平均」，其實根本不是全年級。要到九年級，十九個班才齊全，這張圖才是真正的全年級對照。所以這張圖我只用九年級之後的八場。\n\n另外，九月八號那一場模擬考，到現在只有七個班輸入完成，年級平均不可靠，所以我把那場從這張圖裡拿掉了。不拿掉會比較好看，但那是假的。",
 
@@ -1595,19 +1704,23 @@ const NOTES = {
 
 13:"九年級這一年，我快速掃過去。三次段考、四次模考，還有十二月二十三、二十四號的縣測 —— 縣測最重要，全竹竹苗區一起考，填志願看的就是那個序位。完整行事曆在網頁上，回家自己點開看。",
 
-14:"自然剛剛那一節已經完整講過了，這裡不重複，想再看的掃螢幕上那個連結。\n\n這一頁是數學。四個數字螢幕上都有，我只講一句：這一屆數學普遍難，不是只有我們班，但將近一半的孩子不及格，難不難都得面對。",
+14:"自然剛剛那一節已經完整講過了，這裡不重複，想再看的掃螢幕上那個連結。\n\n這一頁是數學。四個數字螢幕上都有，我只講一句：這一屆數學普遍難，不是只有我們班，但將近一半的孩子沒到 60 分，難不難都得面對。",
 
 15:"這一百分怎麼組成，螢幕上都有，各位掃 QR 回家自己拉拉看。\n\n我只點一個最容易誤會的地方：多元表現那四十分，沒懲罰、沒曠課、服務時數做滿，加起來只有三十二，離四十還差八分，那八分要自己賺。",
 
-16:"這頁很短。畢業門檻兩件事：出席率要到三分之二，公假喪假病假不算；還有獎懲抵銷之後不能滿三大過。正常情況下我們班沒有人會踩到這條線。真正要提醒的是下面那一行 —— 無曠課紀錄在超額比序裡值十二分，所以請假這件事不只是影響畢業，它是直接扣分的。要請假請正常程序請。",
+16:"這一頁只跟少數家庭有關，但我一定要講，因為錯過就真的來不及。\n\n如果你們家有打算讓孩子去別的就學區考 —— 比如搬家、或是要回原本的戶籍地讀 —— 這一項學校不會幫你團體報名。校內受理有一個關門時間，一過，就變成你自己要跑。\n\n時間往回推：要遷戶籍的，最慢三月底要遷好，戶口名簿先備齊。畢業那年三月註冊組會來調查意願，校內申請截止是四月八號，整個作業是四月辦。\n\n還有一件事要先想清楚：變更就學區一旦通過，就不能再回竹苗區選填志願。真的要走這條，先來找我談。",
 
-17:"最後講在家可以怎麼陪。一個請求：不要一開口就問考幾分，你問考幾分，他只會給你一個數字，對話就結束了。\n\n螢幕上三句可以直接拿去用。「這次哪一題你覺得最有意思」是問他有沒有在想事情；「有沒有哪一段是你自己弄懂的」是問成就感；「這次哪個方法有用」是問他有沒有在調整方法。三句都不問分數，但都問得到重點。\n\n右邊兩件事一句話：先顧作息，睡不夠坐再久也沒用；補習可以，但不要補全科。",
+17:"這頁很短。畢業門檻兩件事：出席率要到三分之二，公假喪假病假不算；還有獎懲抵銷之後不能滿三大過。正常情況下我們班沒有人會踩到這條線。真正要提醒的是下面那一行 —— 無曠課紀錄在超額比序裡值十二分，所以請假這件事不只是影響畢業，它是直接扣分的。要請假請正常程序請。",
 
-18:"這一頁我希望大家不要用到，但我還是要講。\n\n九年級壓力很大，孩子撐不住的時候，通常不會直接說。你要看的不是他現在心情好不好，是他有沒有跟以前不一樣 —— 本來睡得著現在睡不著，本來會講學校的事現在都不講了，而且持續兩個禮拜以上。\n\n真的遇到，請先告訴我。你在家看到的跟我在學校看到的，合起來才完整。不要自己扛。學校有輔導室，也有心理師，我幫你連，你不用自己找。\n\n（右邊那個是輔導室的家長讀書會，免費，有興趣等一下跟我說。）",
+18:"這一頁是上屆畢業生自己寫的，不是我寫的。他們剛考完，講的話比我有用。\n\n我只挑最重要的講，就是訂正。第一，不要只訂正錯的題 —— 只要當下不確定的就做記號，最後再一起對，因為有些題你是猜對的，那不算會。第二，錯的過程不要擦掉，擦掉你就不知道自己是哪一步歪的。第三，「知道怎麼解但算錯」跟「根本不知道怎麼解」，訂正的動作完全不一樣：前者拿一張白紙重算一次，確認真的只是粗心；後者要先看詳解把方向弄懂，再用自己的方法練一次。\n\n右邊那五句各位回家慢慢看，我只強調一句：模考重要的是學習，不是分數。",
 
-19:"行政的事分兩段，第一段請各位一定要記住。\n\n班費。九年級不分次收，一次收齊，預計十一月，金額大概九千塊左右。我要講清楚，九千是預估不是確定，因為書籍費跟講義費到現在還沒下來，確定了我會發正式通知，以那張為準。收的方式是請各位把現金交給孩子，帶到學校給我。我今天先講，就是希望十一月不要被嚇到。真的有困難請私下跟我說，不要讓孩子知道。\n\n帳面上還有兩萬八千四百九十二，這是九月十六號算的，會先用掉。帳還在動，所以我螢幕上有標日期。用途是教材講義、模擬考費、班級活動點心、班級用品清潔。完整收支明細在那份試算表，畫面上有 QR code，每一筆都查得到。另外提醒，畢旅費用不走班費，會另外製單，比照註冊費跟代收代辦費繳，不要搞混。\n\n第二段很快：聯絡簿每天簽；服務時數六小時學校排好了，九年級期末打掃是一月十五號；請假七點四十前打電話給我再用 APP 補手續。細節都在網頁上。",
+19:"最後講在家可以怎麼陪。一個請求：不要一開口就問考幾分，你問考幾分，他只會給你一個數字，對話就結束了。\n\n螢幕上三句可以直接拿去用。「這次哪一題你覺得最有意思」是問他有沒有在想事情；「有沒有哪一段是你自己弄懂的」是問成就感；「這次哪個方法有用」是問他有沒有在調整方法。三句都不問分數，但都問得到重點。\n\n右邊兩件事一句話：先顧作息，睡不夠坐再久也沒用；補習可以，但不要補全科。",
 
-20:"我講完了，接下來換你們說 —— 想單獨聊的直接過來找我就好，不用排隊也不用登記，簡短聊幾句就可以。孩子的事、學習的事、成績系統登不進去的都找我；請假手續是學務處。\n\n簡報有 QR code，行事曆、升學資料、常見問題，還有剛剛沒細講的自然科模考範圍，回家都看得到。謝謝各位。"
+20:"這一頁我希望大家不要用到，但我還是要講。\n\n九年級壓力很大，孩子撐不住的時候，通常不會直接說。你要看的不是他現在心情好不好，是他有沒有跟以前不一樣 —— 本來睡得著現在睡不著，本來會講學校的事現在都不講了，而且持續兩個禮拜以上。\n\n真的遇到，請先告訴我。你在家看到的跟我在學校看到的，合起來才完整。不要自己扛。學校有輔導室，也有心理師，我幫你連，你不用自己找。\n\n（右邊那個是輔導室的家長讀書會，免費，有興趣等一下跟我說。）",
+
+21:"行政的事分兩段，第一段請各位一定要記住。\n\n班費。九年級不分次收，一次收齊，預計十一月，金額大概九千塊左右。我要講清楚，九千是預估不是確定，因為書籍費跟講義費到現在還沒下來，確定了我會發正式通知，以那張為準。收的方式是請各位把現金交給孩子，帶到學校給我。我今天先講，就是希望十一月不要被嚇到。真的有困難請私下跟我說，不要讓孩子知道。\n\n帳面上還有兩萬八千四百九十二，這是九月十六號算的，會先用掉。帳還在動，所以我螢幕上有標日期。用途是教材講義、模擬考費、班級活動點心、班級用品清潔。完整收支明細在那份試算表，畫面上有 QR code，每一筆都查得到。另外提醒，畢旅費用不走班費，會另外製單，比照註冊費跟代收代辦費繳，不要搞混。\n\n第二段很快：聯絡簿每天簽；服務時數六小時學校排好了，九年級期末打掃是一月十五號；請假七點四十前打電話給我再用 APP 補手續。細節都在網頁上。",
+
+22:"我講完了，接下來換你們說 —— 想單獨聊的直接過來找我就好，不用排隊也不用登記，簡短聊幾句就可以。孩子的事、學習的事、成績系統登不進去的都找我；請假手續是學務處。\n\n簡報有 QR code，行事曆、升學資料、常見問題，還有剛剛沒細講的自然科模考範圍，回家都看得到。謝謝各位。"
 };
 
 /* ===================================================================
@@ -1881,7 +1994,7 @@ const FOUR = [
   {no:"2", ti:"哪一科最弱，弱在哪一塊", color:"#2A8C89", back:[
     "切到「單科」，五條線一起看，<b>最低的那條就是弱科</b>",
     "再往下問一層：弱在<b>觀念</b>，還是<b>計算</b>？兩種補法完全不同",
-    "先補最容易補的那一塊。全班最該看的是數學（及格率 55.2%）"]},
+    "先補最容易補的那一塊。全班最該看的是數學（達 60 分的只有 55.2%）"]},
   {no:"3", ti:"差幾分才到目標", color:"#D9722B", back:[
     "先和孩子講好一個目標（一所學校、一個 PR、或一個校排）",
     "用系統看：<b>現在跟目標差幾分</b>，再回推哪一科要拉幾分",
@@ -1988,7 +2101,7 @@ const FAQ = [
 ["我的孩子成績會不會被別人看到？",
  "不會。帳號密碼每個人都不一樣，登進去只看得到自己的。<br>"+
  "今天投影出來的那幾張趨勢圖，是我們班真的成績，但我把名字跟座號都拿掉了，只寫同學 A、B、C。我不會說是誰。<br>"+
- "班平均、及格率那些，是三十個人一起算出來的，本來就看不出誰是誰。<br>"+
+ "班平均、達 60 分的人數那些，是三十個人一起算出來的，本來就看不出誰是誰。<br>"+
  "密碼是身分證後四碼。系統目前沒辦法讓孩子自己改，如果你會擔心，跟我說一聲，我幫他改。"],
 
 ["這是學校的系統，還是老師自己做的？",
@@ -2208,6 +2321,7 @@ document.addEventListener("keydown", e => {
   else if(k === "Escape"){ openOverview(); e.preventDefault(); }
   else if(k === "s" || k === "S"){ toggleNotes(); e.preventDefault(); }
   else if(k === "t" || k === "T"){ toggleTimer(); e.preventDefault(); }
+  else if(k === "r" || k === "R"){ resetTimer(); e.preventDefault(); }
   else if(k === "c" || k === "C"){ openCheck(); e.preventDefault(); }
 });
 
@@ -2243,6 +2357,12 @@ function toggleTimer(){
   timerOn = !timerOn;
   $("#timer").classList.toggle("on", timerOn);
   if(timerOn){ t0 = Date.now(); slideStart = Date.now(); perSlide = {}; }
+}
+function resetTimer(){          // R：歸零，行為與 915.html（理化版）一致
+  tickTimer();
+  t0 = Date.now(); slideStart = Date.now(); perSlide = {};
+  timerOn = true;
+  $("#timer").classList.add("on");
 }
 function tickTimer(){
   if(!timerOn) return;
@@ -2356,7 +2476,22 @@ function openCalendar(){
     '<div class="alert" style="margin-top:14px;font-size:21px">'+
       '<b>各版本日期出入（需確認）：</b>第二次模考 917 版 10/28(四)-10/29(五)／918 版 10/29-10/30／'+
       '沁慧版 10/28(三)-10/29(四)（星期標示與 2026 年曆相符）。12/5 與 1/30 兩場考試三份名稱不同，實為同一場。'+
-      '第三次段考九年級 1/14-1/15，七八年級 1/18-1/19。</div>');
+      '第三次段考九年級 1/14-1/15，七八年級 1/18-1/19。</div>'+
+    '<h3 class="t2" style="margin-top:22px">A-3　服務學習時數細目與幾個起訖日</h3>'+
+    '<div class="note-soft" style="margin:0 0 12px">'+
+      '<b>第八節輔導課</b>：8/31(一) 開始、1/8(五) 結束　｜　<b>夜自習</b>：9/21(一) 開始　｜　'+
+      '<b>畢業旅行</b>：1/18(一)-1/20(三)（班務頁目前只寫「畢旅另計」，費用另待確認）</div>'+
+    '<table class="data"><tr><th style="width:300px">項目</th><th>服務學習時數</th></tr>'+
+     '<tr><td>暑期輔導（8/3-8/14）</td><td>2 小時</td></tr>'+
+     '<tr><td>返校（8/28）</td><td>1 小時</td></tr>'+
+     '<tr><td>校慶（11/6-11/7）</td><td>2 小時</td></tr>'+
+     '<tr><td>第三次段考（1/14-1/15）</td><td>1 小時</td></tr></table>'+
+    '<div class="alert" style="margin-top:10px;font-size:21px"><b>114-2 服務時數補登截止：9/18（五）。</b></div>'+
+    '<div class="alert" style="margin-top:10px;font-size:20px"><b>兩份資料並列（需向教務處確認）：</b>'+
+      '916 老師的行事曆只列「三段（服務時數 1 小時）」一筆，第一、二次段考未列時數；'+
+      '本班班務頁列的是「寒暑假境教服務 2／08/28 返校 1／11/07 校慶 2／01/15 期末打掃 1」共 6 小時。'+
+      '「每次段考各 1 小時」未見於任何一份書面資料，<b>實際採計方式請向教務處確認</b>。</div>'+
+    '<div class="sig" style="margin-top:18px;font-size:18px">部分項目參考 916 王煜凱老師整理的年級行事曆。</div>');
   $$("#ovBody [data-cf]").forEach(b => b.addEventListener("click", () => {
     $$("#ovBody [data-cf]").forEach(x => x.classList.remove("on"));
     b.classList.add("on");
@@ -2669,18 +2804,38 @@ function drawRise(){
   }
   h += '<line x1="'+L+'" y1="'+B+'" x2="'+R+'" y2="'+B+'" stroke="#C8BCA8" stroke-width="2"/>';
   h += '<text x="'+(L-9)+'" y="'+(T-14)+'" font-size="17" text-anchor="end" fill="#0F4C5C" font-weight="700">班平均</text>';
-  h += '<text x="'+(R+9)+'" y="'+(T-14)+'" font-size="17" fill="#B08A22" font-weight="700">及格率</text>';
+  h += '<text x="'+(R+9)+'" y="'+(T-14)+'" font-size="17" fill="#B08A22" font-weight="700">達 60 分</text>';
 
-  /* 及格率（次要，黃虛線） */
+  /* 達 60 分的人數（次要，黃虛線；右軸為比例，端點標實際人數） */
   h += '<polyline fill="none" stroke="#D9B44A" stroke-width="4" stroke-dasharray="9 7" points="'+
        RISE.pass.map((v,i) => x(i)+","+yP(v)).join(" ")+'"/>';
   RISE.pass.forEach((v,i) => {
     h += '<circle cx="'+x(i)+'" cy="'+yP(v)+'" r="6" fill="#D9B44A"/>';
     if(i===0)
-      h += '<text x="'+x(i)+'" y="'+(yP(v)+30)+'" font-size="19" text-anchor="middle" fill="#9C7A15" font-weight="800">'+v.toFixed(1)+'%</text>';
+      h += '<text x="'+x(i)+'" y="'+(yP(v)+30)+'" font-size="19" text-anchor="middle" fill="#9C7A15" font-weight="800">'+RISE.passN[i]+' 人</text>';
     else if(i===n-1)
-      h += '<text x="'+(x(i)-20)+'" y="'+(yP(v)-12)+'" font-size="19" text-anchor="end" fill="#9C7A15" font-weight="800">'+v.toFixed(1)+'%</text>';
+      h += '<text x="'+(x(i)-20)+'" y="'+(yP(v)-12)+'" font-size="19" text-anchor="end" fill="#9C7A15" font-weight="800">'+RISE.passN[i]+' 人</text>';
   });
+
+  /* 全年級平均對照（預設不畫，按「＋ 加上全年級」才淡入） */
+  if(showGrade){
+    let g = '<g class="gradeg">';
+    g += '<polyline fill="none" stroke="#8A8075" stroke-width="3.5" stroke-dasharray="7 6" opacity=".85" points="'+
+         GRADE.map((v,i) => x(i)+","+yA(v)).join(" ")+'"/>';
+    GRADE.forEach((v,i) => {
+      const thin = GRADE_N[i] < 300;                 /* 9/8 僅 143 人，樣本不足 */
+      g += thin
+        ? '<circle cx="'+x(i)+'" cy="'+yA(v)+'" r="6" fill="var(--bg)" stroke="#8A8075" stroke-width="2.5"/>'
+        : '<circle cx="'+x(i)+'" cy="'+yA(v)+'" r="6" fill="#8A8075"/>';
+      /* 首點往右、末點往左，避開黃線端點標與右軸刻度 */
+      const anc = i===0 ? "start" : (i===n-1 ? "end" : "middle");
+      const gx  = i===0 ? x(i)+32 : (i===n-1 ? x(i)-10 : x(i));
+      g += '<text x="'+gx+'" y="'+(yA(v)+20)+'" font-size="16" text-anchor="'+anc+'" fill="#3F7A47" font-weight="800">+'+
+           (RISE.avg[i]-v).toFixed(2)+(thin?' *':'')+'</text>';
+    });
+    g += '</g>';
+    h += g;
+  }
 
   /* 班平均（主線，深青藍） */
   h += '<polyline fill="none" stroke="#0F4C5C" stroke-width="6" stroke-linejoin="round" points="'+
@@ -2690,12 +2845,14 @@ function drawRise(){
     h += '<text x="'+x(i)+'" y="'+(yA(v)-19)+'" font-size="21" text-anchor="middle" font-weight="800" fill="#0F4C5C">'+v.toFixed(1)+'</text>';
   });
 
-  /* 起點到終點的上升標註 */
+  /* 起點到終點的上升標註（展開年級對照時收起，避免蓋住差距標示） */
+  if(!showGrade){
   h += '<defs><marker id="arrRise" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">'+
        '<path d="M0,0 L6,3 L0,6 z" fill="#D9722B"/></marker></defs>';
   h += '<line x1="'+(x(0)+16)+'" y1="'+(yA(RISE.avg[0])+18)+'" x2="'+(x(n-1)-14)+'" y2="'+(yA(RISE.avg[n-1])+18)+'" '+
        'stroke="#D9722B" stroke-width="3" stroke-dasharray="10 8" marker-end="url(#arrRise)" opacity=".85"/>';
   h += '<text x="'+((x(0)+x(n-1))/2)+'" y="'+(yA(RISE.avg[0])+8)+'" font-size="24" text-anchor="middle" fill="#D9722B" font-weight="900">+9.5 分</text>';
+  }
 
   /* 橫軸 */
   RISE.labels.forEach((lb,i) => {
@@ -3083,12 +3240,48 @@ $$("#s16 .qgood").forEach(q => q.addEventListener("click", () => {
   }));
 })();
 
+/* --- 第 7 頁：「＋ 加上全年級」低調切換鈕（預設收起） --- */
+(function(){
+  const btn = $("#toggleGrade"), note = $("#gradeNote");
+  if(!btn) return;
+  btn.addEventListener("click", () => {
+    showGrade = !showGrade;
+    btn.setAttribute("aria-pressed", showGrade ? "true" : "false");
+    btn.textContent = showGrade ? "－ 收起全年級" : "＋ 加上全年級";
+    note.hidden = !showGrade;
+    drawRise();
+  });
+})();
+
 /* --- 第 18 頁：QR + 附錄按鈕 --- */
 renderQR("#qrSlides", "#qrSlidesUrl", CONFIG.slidesUrl, "簡報網址");
 renderQR("#qrCover", null, CONFIG.slidesUrl, "簡報網址");
 $("#openAppB").addEventListener("click", openAppendixB);
 $("#openAppC").addEventListener("click", openFAQ);
 $("#openAppC").textContent = "家長常見 " + FAQ.length + " 問";   // 題數自動同步，增刪 FAQ 不會不一致
+
+/* --- 學長姐訂正頁：來回跳頁（用 seniorsFrom 記住來源頁） --- */
+let seniorsFrom = null;
+const pageOf = id => slides.findIndex(sl => sl.id === id);
+$("#toSeniors").addEventListener("click", () => {
+  seniorsFrom = cur;                       // 記住從哪一頁跳過來
+  go(pageOf("s15b"));
+});
+$("#backFromSeniors").addEventListener("click", () => {
+  // 1) 本檔內部跳過來的 → 回原本那一頁
+  if(seniorsFrom !== null){ go(seniorsFrom); return; }
+  // 2) 從同網域的另一份簡報（例如理化版 915.html）連過來 → 回那一份
+  try{
+    const ref = document.referrer;
+    if(ref){
+      const u = new URL(ref, location.href);
+      if(u.origin === location.origin && /\.html$/i.test(u.pathname) &&
+         u.pathname !== location.pathname){ location.href = ref; return; }
+    }
+  }catch(err){}
+  // 3) 都不是 → 回第 14 頁
+  go(pageOf("s13b"));
+});
 
 /* ===================================================================
    啟動
@@ -3104,6 +3297,14 @@ $("#progress").style.width = (1/N*100)+"%";
 updateNotes();
 slideStart = Date.now();
 onEnter(1);
+
+/* 深連結：915-homeroom.html#18 —— 理化版「學長姐怎麼訂正」那顆會用到 */
+(function(){
+  const m = /^#(\d+)$/.exec(location.hash || "");
+  if(!m) return;
+  const p = parseInt(m[1], 10);
+  if(p >= 1 && p <= N) go(p - 1);
+})();
 </script>
 
 <script>

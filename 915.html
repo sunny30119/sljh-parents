@@ -284,6 +284,10 @@ em{font-style:normal;color:var(--flame);font-weight:900}
 .ask-body{display:flex;flex-direction:column;gap:4px}
 .ask-body h3{font-size:clamp(16px,1.65vw,23px)}
 .ask-body p{font-size:clamp(13.5px,1.25vw,17.5px)}
+.ask-link{align-self:flex-start;margin-top:6px;display:inline-block;text-decoration:none;
+  font-size:clamp(12.5px,1.15vw,16px);font-weight:800;color:var(--flame);
+  border:2px solid var(--flame);border-radius:999px;padding:5px 14px;line-height:1.2}
+.ask-link:hover{background:var(--flame-soft)}
 
 /* ---------- 網頁頁 ---------- */
 .link-box{
@@ -978,6 +982,7 @@ a.link-url:hover{color:var(--on-ink,#fff)}
           <h3>盯訂正，不要盯分數</h3>
           <p>考卷發回來，分數看過就好。<strong>真正要問的是「這題你現在會了嗎」</strong>。訂正如果只是把答案抄上去，那張考卷就白考了 —— 請幫我看一下，孩子的訂正是抄的，還是真的重想了一次。</p>
           <p>想知道他哪個範圍掉了，<strong>用成績查詢系統點那次段考就看得到</strong>。（等一下導師時間我會說明怎麼登入）</p>
+          <a class="ask-link" href="915-homeroom.html#18">學長姐怎麼訂正 →</a>
         </div>
       </div>
       <div class="ask">
@@ -1450,6 +1455,33 @@ document.addEventListener('keydown', function (e) {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.key === 'h' || e.key === 'H') { e.preventDefault(); location.href = 'index.html'; }
 }, true);
+</script>
+
+<script>
+/* ── 與導師版「學長姐」頁的來回 ───────────────────────────────
+   離開前把目前頁碼記在 sessionStorage，回來時用公開的「下一頁」鈕走回去。
+   完全不動既有導覽邏輯，讀取後即清除（一次性）。 */
+(function () {
+  var KEY = 'sljh:915:backTo';
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var curPage = function () {
+    for (var i = 0; i < slides.length; i++)
+      if (slides[i].classList.contains('is-current')) return i + 1;
+    return 1;
+  };
+  var link = document.querySelector('.ask-link');
+  if (link) link.addEventListener('click', function () {
+    try { sessionStorage.setItem(KEY, String(curPage())); } catch (e) {}
+  });
+
+  var back = null;
+  try { back = sessionStorage.getItem(KEY); sessionStorage.removeItem(KEY); } catch (e) {}
+  var target = parseInt(back, 10);
+  if (!(target > 1 && target <= slides.length)) return;
+  var next = document.getElementById('next');
+  if (!next) return;
+  for (var n = curPage(); n < target; n++) next.click();
+})();
 </script>
 </body>
 </html>
