@@ -1388,5 +1388,16 @@ const NOTES = {
 })();
 
 </script>
+
+<script>
+/* ── 隱藏快捷鍵：按 H 回到入口頁 ────────────────────────────
+   刻意不寫在 HUD 提示列上，只有老師知道。
+   家長用手機看沒有鍵盤，按不到；投影時也不會誤觸。 */
+document.addEventListener('keydown', function (e) {
+  if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'h' || e.key === 'H') { e.preventDefault(); location.href = 'index.html'; }
+}, true);
+</script>
 </body>
 </html>
