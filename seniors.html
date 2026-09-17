@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>學長姐怎麼準備會考</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+TC:wght@400;500;700;900&display=swap">
+<style>
+/* 色票沿用入口頁與四份簡報的 token */
+:root{
+  --ground:#FFF6EF;
+  --surface:#FFFFFF;
+  --surface-2:#FCE7DA;
+  --ink:#241610;
+  --ink-2:#5B443A;
+  --muted:#8C7367;
+  --line:#EBD3C4;
+  --flame:#E84A27;
+  --teal:#0E8C7F;
+  --sun:#F7B32B;
+  --deep:#1E3A5F;
+  --shadow:0 2px 4px rgba(36,22,16,.05),0 14px 34px -14px rgba(232,74,39,.26);
+  --sans:'Noto Sans TC',"PingFang TC","Microsoft JhengHei",sans-serif;
+  --hit:'Anton','Noto Sans TC',"PingFang TC","Microsoft JhengHei",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#1A1210; --surface:#241A16; --surface-2:#38241C;
+    --ink:#FBEDE4; --ink-2:#D3BCB0; --muted:#A08A7D; --line:#432E25;
+    --flame:#FF6A45; --teal:#35C6B4; --sun:#FFC64B; --deep:#8FB6DE;
+    --shadow:0 2px 4px rgba(0,0,0,.4),0 16px 38px -16px rgba(0,0,0,.7);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;max-width:100%;overflow-x:hidden}
+body{
+  background:var(--ground);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;height:auto;display:block}
+
+.wrap{
+  max-width:940px;margin:0 auto;
+  padding-inline:16px;
+  padding-block:clamp(18px,4vw,34px) clamp(36px,7vw,72px);
+  display:flex;flex-direction:column;gap:clamp(20px,3.6vw,30px);
+}
+
+/* ---------- 返回鈕 ---------- */
+.backbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.back{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--hit);letter-spacing:.05em;
+  font-size:clamp(13.5px,3.3vw,16px);
+  background:var(--surface);color:var(--ink);
+  border:2px solid var(--line);border-radius:999px;
+  padding:8px 18px;cursor:pointer;text-decoration:none;
+  box-shadow:0 1px 2px rgba(36,22,16,.05);
+  transition:border-color .16s ease, transform .16s ease;
+}
+.back:hover{border-color:var(--flame);transform:translateY(-1px)}
+.back:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.back{transition:none}.back:hover{transform:none}}
+
+/* ---------- 頁首 ---------- */
+.head{display:flex;flex-direction:column;gap:10px}
+.eyebrow{
+  align-self:flex-start;
+  font-family:var(--hit);letter-spacing:.1em;
+  font-size:clamp(12px,3vw,15px);
+  background:var(--flame);color:#fff;
+  padding:4px 14px;border-radius:999px;line-height:1.6;
+}
+h1{
+  margin:0;font-family:var(--hit);font-weight:400;
+  font-size:clamp(34px,8.6vw,64px);line-height:1;
+  letter-spacing:-.01em;color:var(--ink);
+}
+.sub{margin:0;font-size:clamp(14.5px,3.6vw,18px);color:var(--ink-2);font-weight:700}
+.strip{display:flex;gap:6px;align-items:center;margin-top:3px}
+.strip i{height:8px;border-radius:999px;display:block}
+.strip i:nth-child(1){width:74px;background:var(--flame)}
+.strip i:nth-child(2){width:34px;background:var(--sun)}
+.strip i:nth-child(3){width:18px;background:var(--teal)}
+
+/* ---------- 出處聲明（醒目，放最前面） ---------- */
+.credit{
+  background:var(--surface);
+  border-radius:15px;
+  border-left:9px solid var(--sun);
+  box-shadow:var(--shadow);
+  padding:clamp(16px,3.4vw,24px);
+  display:flex;flex-direction:column;gap:8px;
+}
+.credit-label{
+  align-self:flex-start;
+  font-family:var(--hit);letter-spacing:.09em;
+  font-size:clamp(12px,2.9vw,14px);
+  background:var(--sun);color:#3A2600;
+  padding:3px 13px;border-radius:999px;line-height:1.6;
+}
+.credit p{margin:0;font-size:clamp(14.5px,3.5vw,17px);color:var(--ink-2);line-height:1.8}
+.credit strong{color:var(--ink);font-weight:900}
+.credit .thanks{color:var(--muted);font-size:clamp(13.5px,3.3vw,15.5px)}
+
+/* ---------- 導讀 ---------- */
+.intro{
+  font-size:clamp(13.5px,3.3vw,15.5px);
+  color:var(--muted);line-height:1.75;margin:0;
+}
+
+/* ---------- 一張一張 ---------- */
+.sheets{display:flex;flex-direction:column;gap:clamp(20px,3.6vw,32px)}
+.sheet{display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.cap{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.cap .no{
+  flex:0 0 auto;
+  font-family:var(--hit);letter-spacing:.06em;
+  font-size:clamp(13px,3vw,15px);
+  color:#fff;background:var(--teal);
+  padding:2px 11px;border-radius:999px;line-height:1.7;
+}
+.cap .tt{
+  font-size:clamp(16px,4.2vw,22px);font-weight:900;
+  line-height:1.4;letter-spacing:-.01em;color:var(--ink);
+}
+.frame{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:13px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.frame img{width:100%}
+
+/* ---------- 頁尾 ---------- */
+.foot{
+  font-size:clamp(12.5px,3.1vw,14.5px);
+  color:var(--muted);line-height:1.8;
+  border-top:2px solid var(--line);padding-top:16px;
+  margin:0;
+}
+.foot strong{color:var(--ink-2)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="backbar">
+    <a class="back" id="backBtn" href="index.html">← 回到剛才那頁</a>
+  </div>
+
+  <header class="head">
+    <span class="eyebrow">給 915 的孩子與家長</span>
+    <h1>學長姐怎麼準備會考</h1>
+    <p class="sub">上屆畢業生親筆寫的 13 張　·　原圖完整呈現</p>
+    <div class="strip"><i></i><i></i><i></i></div>
+  </header>
+
+  <!-- ========== 出處聲明：老師要求放在最前面、要醒目 ========== -->
+  <section class="credit">
+    <span class="credit-label">出處聲明</span>
+    <p>
+      本頁內容為 <strong>916 班　王煜凱老師</strong> 於 115 學年度第一學期班親會分享的簡報原圖，
+      由上屆畢業生親筆撰寫。<strong>版權與內容均屬原作者所有</strong>，此處僅為班級教學分享之用。
+    </p>
+    <p class="thanks">感謝王老師與學長姐們。</p>
+  </section>
+
+  <p class="intro">
+    以下 13 張都是原圖，沒有裁切、沒有修改。每張上面那一行小標是李老師加的導讀，方便你捲動時知道在看什麼。
+  </p>
+
+  <main class="sheets">
+
+    <section class="sheet">
+      <div class="cap"><span class="no">01</span><span class="tt">開場：來自學長姐的精華</span></div>
+      <div class="frame"><img src="seniors/01.jpg" alt="第 1 張原圖：來自學長姐的精華" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">02</span><span class="tt">國文：心智圖怎麼畫 —— 字音字形、白話文、文言文、成語四條線</span></div>
+      <div class="frame"><img src="seniors/02.jpg" alt="第 2 張原圖：國文科的準備心智圖" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">03</span><span class="tt">數學：時間分配、一定要會的單元、每天練基本運算</span></div>
+      <div class="frame"><img src="seniors/03.jpg" alt="第 3 張原圖：數學科的準備心智圖" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">04</span><span class="tt">心態：讀不下去的時候、怎麼固定習慣、成績有情緒怎麼辦</span></div>
+      <div class="frame"><img src="seniors/04.jpg" alt="第 4 張原圖：全科統整與心態調適" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">05</span><span class="tt">接下來講「訂正」：國文與數學</span></div>
+      <div class="frame"><img src="seniors/05.jpg" alt="第 5 張原圖：訂正（段落標題）" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">06</span><span class="tt">訂正原則：不要只訂正錯的題，不確定就做記號</span></div>
+      <div class="frame"><img src="seniors/06.jpg" alt="第 6 張原圖：訂正的原則" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">07</span><span class="tt">國文的訂正法：形、音、義、古文，四種做法不一樣</span></div>
+      <div class="frame"><img src="seniors/07.jpg" alt="第 7 張原圖：國文的訂正法" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">08</span><span class="tt">數學的訂正法：「知道怎麼解」和「不知道怎麼解」要分開處理</span></div>
+      <div class="frame"><img src="seniors/08.jpg" alt="第 8 張原圖：數學的訂正法" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">09</span><span class="tt">筆記與寫題：不要做自己以後不會看的筆記</span></div>
+      <div class="frame"><img src="seniors/09.jpg" alt="第 9 張原圖：筆記與寫題的原則" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">10</span><span class="tt">環境與睡眠：桌上只放要用的，千萬別熬夜</span></div>
+      <div class="frame"><img src="seniors/10.jpg" alt="第 10 張原圖：讀書環境與睡眠" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">11</span><span class="tt">升英文字母，比升加號更重要</span></div>
+      <div class="frame"><img src="seniors/11.jpg" alt="第 11 張原圖：字母與加號" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">12</span><span class="tt">模考重要的是學習，不是分數</span></div>
+      <div class="frame"><img src="seniors/12.jpg" alt="第 12 張原圖：模考的意義" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+    <section class="sheet">
+      <div class="cap"><span class="no">13</span><span class="tt">有壓力時會怎麼辦：難過可以，但不要帶到隔天</span></div>
+      <div class="frame"><img src="seniors/13.jpg" alt="第 13 張原圖：有壓力時會怎麼辦" width="1400" height="788" loading="lazy" decoding="async"></div>
+    </section>
+
+  </main>
+
+  <p class="foot">
+    <strong>原圖出處：916 班 王煜凱老師｜內容由上屆畢業生撰寫</strong><br>
+    版權與內容均屬原作者所有，此處僅為班級教學分享之用。<br>
+    按 <strong>H</strong> 可以回到班親會入口頁。
+  </p>
+
+</div>
+
+<script>
+/* 返回鈕：若來源是同網域的另一支 .html 就回去，否則回 index.html */
+(function () {
+  var btn = document.getElementById('backBtn');
+  if (!btn) return;
+  try {
+    var ref = document.referrer;
+    if (ref) {
+      var u = new URL(ref, location.href);
+      if (u.origin === location.origin &&
+          /\.html$/i.test(u.pathname) &&
+          u.pathname !== location.pathname) {
+        btn.href = ref;
+      }
+    }
+  } catch (e) {}
+})();
+
+/* H 鍵回入口頁（比照其他四份） */
+document.addEventListener('keydown', function (e) {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  var t = e.target;
+  if (t && (t.isContentEditable ||
+            /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName || ''))) return;
+  if (e.key === 'h' || e.key === 'H') {
+    e.preventDefault();
+    location.href = 'index.html';
+  }
+}, true);
+</script>
+
+</body>
+</html>
